@@ -1,0 +1,600 @@
+<!doctype html>
+<html>
+<head>
+<meta charset='UTF-8'><meta name='viewport' content='width=device-width initial-scale=1'>
+
+<link href='https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext' rel='stylesheet' type='text/css' /><style type='text/css'>html {overflow-x: initial !important;}:root { --bg-color:#ffffff; --text-color:#333333; --select-text-bg-color:#B5D6FC; --select-text-font-color:auto; --monospace:"Lucida Console",Consolas,"Courier",monospace; --title-bar-height:20px; }
+.mac-os-11 { --title-bar-height:28px; }
+html { font-size: 14px; background-color: var(--bg-color); color: var(--text-color); font-family: "Helvetica Neue", Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
+body { margin: 0px; padding: 0px; height: auto; inset: 0px; font-size: 1rem; line-height: 1.42857; overflow-x: hidden; background: inherit; tab-size: 4; }
+iframe { margin: auto; }
+a.url { word-break: break-all; }
+a:active, a:hover { outline: 0px; }
+.in-text-selection, ::selection { text-shadow: none; background: var(--select-text-bg-color); color: var(--select-text-font-color); }
+#write { margin: 0px auto; height: auto; width: inherit; word-break: normal; overflow-wrap: break-word; position: relative; white-space: normal; overflow-x: visible; padding-top: 36px; }
+#write.first-line-indent p { text-indent: 2em; }
+#write.first-line-indent li p, #write.first-line-indent p * { text-indent: 0px; }
+#write.first-line-indent li { margin-left: 2em; }
+.for-image #write { padding-left: 8px; padding-right: 8px; }
+body.typora-export { padding-left: 30px; padding-right: 30px; }
+.typora-export .footnote-line, .typora-export li, .typora-export p { white-space: pre-wrap; }
+.typora-export .task-list-item input { pointer-events: none; }
+@media screen and (max-width: 500px) {
+  body.typora-export { padding-left: 0px; padding-right: 0px; }
+  #write { padding-left: 20px; padding-right: 20px; }
+  .CodeMirror-sizer { margin-left: 0px !important; }
+  .CodeMirror-gutters { display: none !important; }
+}
+#write li > figure:last-child { margin-bottom: 0.5rem; }
+#write ol, #write ul { position: relative; }
+img { max-width: 100%; vertical-align: middle; image-orientation: from-image; }
+button, input, select, textarea { color: inherit; font: inherit; }
+input[type="checkbox"], input[type="radio"] { line-height: normal; padding: 0px; }
+*, ::after, ::before { box-sizing: border-box; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p, #write pre { width: inherit; }
+#write h1, #write h2, #write h3, #write h4, #write h5, #write h6, #write p { position: relative; }
+p { line-height: inherit; }
+h1, h2, h3, h4, h5, h6 { break-after: avoid-page; break-inside: avoid; orphans: 4; }
+p { orphans: 4; }
+h1 { font-size: 2rem; }
+h2 { font-size: 1.8rem; }
+h3 { font-size: 1.6rem; }
+h4 { font-size: 1.4rem; }
+h5 { font-size: 1.2rem; }
+h6 { font-size: 1rem; }
+.md-math-block, .md-rawblock, h1, h2, h3, h4, h5, h6, p { margin-top: 1rem; margin-bottom: 1rem; }
+.hidden { display: none; }
+.md-blockmeta { color: rgb(204, 204, 204); font-weight: 700; font-style: italic; }
+a { cursor: pointer; }
+sup.md-footnote { padding: 2px 4px; background-color: rgba(238, 238, 238, 0.7); color: rgb(85, 85, 85); border-radius: 4px; cursor: pointer; }
+sup.md-footnote a, sup.md-footnote a:hover { color: inherit; text-transform: inherit; text-decoration: inherit; }
+#write input[type="checkbox"] { cursor: pointer; width: inherit; height: inherit; }
+figure { overflow-x: auto; margin: 1.2em 0px; max-width: calc(100% + 16px); padding: 0px; }
+figure > table { margin: 0px; }
+tr { break-inside: avoid; break-after: auto; }
+thead { display: table-header-group; }
+table { border-collapse: collapse; border-spacing: 0px; width: 100%; overflow: auto; break-inside: auto; text-align: left; }
+table.md-table td { min-width: 32px; }
+.CodeMirror-gutters { border-right: 0px; background-color: inherit; }
+.CodeMirror-linenumber { user-select: none; }
+.CodeMirror { text-align: left; }
+.CodeMirror-placeholder { opacity: 0.3; }
+.CodeMirror pre { padding: 0px 4px; }
+.CodeMirror-lines { padding: 0px; }
+div.hr:focus { cursor: none; }
+#write pre { white-space: pre-wrap; }
+#write.fences-no-line-wrapping pre { white-space: pre; }
+#write pre.ty-contain-cm { white-space: normal; }
+.CodeMirror-gutters { margin-right: 4px; }
+.md-fences { font-size: 0.9rem; display: block; break-inside: avoid; text-align: left; overflow: visible; white-space: pre; background: inherit; position: relative !important; }
+.md-fences-adv-panel { width: 100%; margin-top: 10px; text-align: center; padding-top: 0px; padding-bottom: 8px; overflow-x: auto; }
+#write .md-fences.mock-cm { white-space: pre-wrap; }
+.md-fences.md-fences-with-lineno { padding-left: 0px; }
+#write.fences-no-line-wrapping .md-fences.mock-cm { white-space: pre; overflow-x: auto; }
+.md-fences.mock-cm.md-fences-with-lineno { padding-left: 8px; }
+.CodeMirror-line, twitterwidget { break-inside: avoid; }
+.footnotes { opacity: 0.8; font-size: 0.9rem; margin-top: 1em; margin-bottom: 1em; }
+.footnotes + .footnotes { margin-top: 0px; }
+.md-reset { margin: 0px; padding: 0px; border: 0px; outline: 0px; vertical-align: top; background: 0px 0px; text-decoration: none; text-shadow: none; float: none; position: static; width: auto; height: auto; white-space: nowrap; cursor: inherit; -webkit-tap-highlight-color: transparent; line-height: normal; font-weight: 400; text-align: left; box-sizing: content-box; direction: ltr; }
+li div { padding-top: 0px; }
+blockquote { margin: 1rem 0px; }
+li .mathjax-block, li p { margin: 0.5rem 0px; }
+li blockquote { margin: 1rem 0px; }
+li { margin: 0px; position: relative; }
+blockquote > :last-child { margin-bottom: 0px; }
+blockquote > :first-child, li > :first-child { margin-top: 0px; }
+.footnotes-area { color: rgb(136, 136, 136); margin-top: 0.714rem; padding-bottom: 0.143rem; white-space: normal; }
+#write .footnote-line { white-space: pre-wrap; }
+@media print {
+  body, html { border: 1px solid transparent; height: 99%; break-after: avoid; break-before: avoid; font-variant-ligatures: no-common-ligatures; }
+  #write { margin-top: 0px; padding-top: 0px; border-color: transparent !important; }
+  .typora-export * { -webkit-print-color-adjust: exact; }
+  .typora-export #write { break-after: avoid; }
+  .typora-export #write::after { height: 0px; }
+  .is-mac table { break-inside: avoid; }
+  .typora-export-show-outline .typora-export-sidebar { display: none; }
+}
+.footnote-line { margin-top: 0.714em; font-size: 0.7em; }
+a img, img a { cursor: pointer; }
+pre.md-meta-block { font-size: 0.8rem; min-height: 0.8rem; white-space: pre-wrap; background: rgb(204, 204, 204); display: block; overflow-x: hidden; }
+p > .md-image:only-child:not(.md-img-error) img, p > img:only-child { display: block; margin: auto; }
+#write.first-line-indent p > .md-image:only-child:not(.md-img-error) img { left: -2em; position: relative; }
+p > .md-image:only-child { display: inline-block; width: 100%; }
+#write .MathJax_Display { margin: 0.8em 0px 0px; }
+.md-math-block { width: 100%; }
+.md-math-block:not(:empty)::after { display: none; }
+.MathJax_ref { fill: currentcolor; }
+[contenteditable="true"]:active, [contenteditable="true"]:focus, [contenteditable="false"]:active, [contenteditable="false"]:focus { outline: 0px; box-shadow: none; }
+.md-task-list-item { position: relative; list-style-type: none; }
+.task-list-item.md-task-list-item { padding-left: 0px; }
+.md-task-list-item > input { position: absolute; top: 0px; left: 0px; margin-left: -1.2em; margin-top: calc(1em - 10px); border: none; }
+.math { font-size: 1rem; }
+.md-toc { min-height: 3.58rem; position: relative; font-size: 0.9rem; border-radius: 10px; }
+.md-toc-content { position: relative; margin-left: 0px; }
+.md-toc-content::after, .md-toc::after { display: none; }
+.md-toc-item { display: block; color: rgb(65, 131, 196); }
+.md-toc-item a { text-decoration: none; }
+.md-toc-inner:hover { text-decoration: underline; }
+.md-toc-inner { display: inline-block; cursor: pointer; }
+.md-toc-h1 .md-toc-inner { margin-left: 0px; font-weight: 700; }
+.md-toc-h2 .md-toc-inner { margin-left: 2em; }
+.md-toc-h3 .md-toc-inner { margin-left: 4em; }
+.md-toc-h4 .md-toc-inner { margin-left: 6em; }
+.md-toc-h5 .md-toc-inner { margin-left: 8em; }
+.md-toc-h6 .md-toc-inner { margin-left: 10em; }
+@media screen and (max-width: 48em) {
+  .md-toc-h3 .md-toc-inner { margin-left: 3.5em; }
+  .md-toc-h4 .md-toc-inner { margin-left: 5em; }
+  .md-toc-h5 .md-toc-inner { margin-left: 6.5em; }
+  .md-toc-h6 .md-toc-inner { margin-left: 8em; }
+}
+a.md-toc-inner { font-size: inherit; font-style: inherit; font-weight: inherit; line-height: inherit; }
+.footnote-line a:not(.reversefootnote) { color: inherit; }
+.md-attr { display: none; }
+.md-fn-count::after { content: "."; }
+code, pre, samp, tt { font-family: var(--monospace); }
+kbd { margin: 0px 0.1em; padding: 0.1em 0.6em; font-size: 0.8em; color: rgb(36, 39, 41); background: rgb(255, 255, 255); border: 1px solid rgb(173, 179, 185); border-radius: 3px; box-shadow: rgba(12, 13, 14, 0.2) 0px 1px 0px, rgb(255, 255, 255) 0px 0px 0px 2px inset; white-space: nowrap; vertical-align: middle; }
+.md-comment { color: rgb(162, 127, 3); opacity: 0.6; font-family: var(--monospace); }
+code { text-align: left; vertical-align: initial; }
+a.md-print-anchor { white-space: pre !important; border-width: initial !important; border-style: none !important; border-color: initial !important; display: inline-block !important; position: absolute !important; width: 1px !important; right: 0px !important; outline: 0px !important; background: 0px 0px !important; text-decoration: initial !important; text-shadow: initial !important; }
+.os-windows.monocolor-emoji .md-emoji { font-family: "Segoe UI Symbol", sans-serif; }
+.md-diagram-panel > svg { max-width: 100%; }
+[lang="flow"] svg, [lang="mermaid"] svg { max-width: 100%; height: auto; }
+[lang="mermaid"] .node text { font-size: 1rem; }
+table tr th { border-bottom: 0px; }
+video { max-width: 100%; display: block; margin: 0px auto; }
+iframe { max-width: 100%; width: 100%; border: none; }
+.highlight td, .highlight tr { border: 0px; }
+mark { background: rgb(255, 255, 0); color: rgb(0, 0, 0); }
+.md-html-inline .md-plain, .md-html-inline strong, mark .md-inline-math, mark strong { color: inherit; }
+.md-expand mark .md-meta { opacity: 0.3 !important; }
+mark .md-meta { color: rgb(0, 0, 0); }
+@media print {
+  .typora-export h1, .typora-export h2, .typora-export h3, .typora-export h4, .typora-export h5, .typora-export h6 { break-inside: avoid; }
+}
+.md-diagram-panel .messageText { stroke: none !important; }
+.md-diagram-panel .start-state { fill: var(--node-fill); }
+.md-diagram-panel .edgeLabel rect { opacity: 1 !important; }
+.md-fences.md-fences-math { font-size: 1em; }
+.md-fences-advanced:not(.md-focus) { padding: 0px; white-space: nowrap; border: 0px; }
+.md-fences-advanced:not(.md-focus) { background: inherit; }
+.typora-export-show-outline .typora-export-content { max-width: 1440px; margin: auto; display: flex; flex-direction: row; }
+.typora-export-sidebar { width: 300px; font-size: 0.8rem; margin-top: 80px; margin-right: 18px; }
+.typora-export-show-outline #write { --webkit-flex:2; flex: 2 1 0%; }
+.typora-export-sidebar .outline-content { position: fixed; top: 0px; max-height: 100%; overflow: hidden auto; padding-bottom: 30px; padding-top: 60px; width: 300px; }
+@media screen and (max-width: 1024px) {
+  .typora-export-sidebar, .typora-export-sidebar .outline-content { width: 240px; }
+}
+@media screen and (max-width: 800px) {
+  .typora-export-sidebar { display: none; }
+}
+.outline-content li, .outline-content ul { margin-left: 0px; margin-right: 0px; padding-left: 0px; padding-right: 0px; list-style: none; }
+.outline-content ul { margin-top: 0px; margin-bottom: 0px; }
+.outline-content strong { font-weight: 400; }
+.outline-expander { width: 1rem; height: 1.42857rem; position: relative; display: table-cell; vertical-align: middle; cursor: pointer; padding-left: 4px; }
+.outline-expander::before { content: ""; position: relative; font-family: Ionicons; display: inline-block; font-size: 8px; vertical-align: middle; }
+.outline-item { padding-top: 3px; padding-bottom: 3px; cursor: pointer; }
+.outline-expander:hover::before { content: ""; }
+.outline-h1 > .outline-item { padding-left: 0px; }
+.outline-h2 > .outline-item { padding-left: 1em; }
+.outline-h3 > .outline-item { padding-left: 2em; }
+.outline-h4 > .outline-item { padding-left: 3em; }
+.outline-h5 > .outline-item { padding-left: 4em; }
+.outline-h6 > .outline-item { padding-left: 5em; }
+.outline-label { cursor: pointer; display: table-cell; vertical-align: middle; text-decoration: none; color: inherit; }
+.outline-label:hover { text-decoration: underline; }
+.outline-item:hover { border-color: rgb(245, 245, 245); background-color: var(--item-hover-bg-color); }
+.outline-item:hover { margin-left: -28px; margin-right: -28px; border-left: 28px solid transparent; border-right: 28px solid transparent; }
+.outline-item-single .outline-expander::before, .outline-item-single .outline-expander:hover::before { display: none; }
+.outline-item-open > .outline-item > .outline-expander::before { content: ""; }
+.outline-children { display: none; }
+.info-panel-tab-wrapper { display: none; }
+.outline-item-open > .outline-children { display: block; }
+.typora-export .outline-item { padding-top: 1px; padding-bottom: 1px; }
+.typora-export .outline-item:hover { margin-right: -8px; border-right: 8px solid transparent; }
+.typora-export .outline-expander::before { content: "+"; font-family: inherit; top: -1px; }
+.typora-export .outline-expander:hover::before, .typora-export .outline-item-open > .outline-item > .outline-expander::before { content: "−"; }
+.typora-export-collapse-outline .outline-children { display: none; }
+.typora-export-collapse-outline .outline-item-open > .outline-children, .typora-export-no-collapse-outline .outline-children { display: block; }
+.typora-export-no-collapse-outline .outline-expander::before { content: "" !important; }
+.typora-export-show-outline .outline-item-active > .outline-item .outline-label { font-weight: 700; }
+.md-inline-math-container mjx-container { zoom: 0.95; }
+
+
+:root {
+    --side-bar-bg-color: #fafafa;
+    --control-text-color: #777;
+}
+
+@include-when-export url(https://fonts.loli.net/css?family=Open+Sans:400italic,700italic,700,400&subset=latin,latin-ext);
+
+/* open-sans-regular - latin-ext_latin */
+  /* open-sans-italic - latin-ext_latin */
+    /* open-sans-700 - latin-ext_latin */
+    /* open-sans-700italic - latin-ext_latin */
+  html {
+    font-size: 16px;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    font-family: "Open Sans","Clear Sans", "Helvetica Neue", Helvetica, Arial, 'Segoe UI Emoji', sans-serif;
+    color: rgb(51, 51, 51);
+    line-height: 1.6;
+}
+
+#write {
+    max-width: 860px;
+  	margin: 0 auto;
+  	padding: 30px;
+    padding-bottom: 100px;
+}
+
+@media only screen and (min-width: 1400px) {
+	#write {
+		max-width: 1024px;
+	}
+}
+
+@media only screen and (min-width: 1800px) {
+	#write {
+		max-width: 1200px;
+	}
+}
+
+#write > ul:first-child,
+#write > ol:first-child{
+    margin-top: 30px;
+}
+
+a {
+    color: #4183C4;
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    position: relative;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+    line-height: 1.4;
+    cursor: text;
+}
+h1:hover a.anchor,
+h2:hover a.anchor,
+h3:hover a.anchor,
+h4:hover a.anchor,
+h5:hover a.anchor,
+h6:hover a.anchor {
+    text-decoration: none;
+}
+h1 tt,
+h1 code {
+    font-size: inherit;
+}
+h2 tt,
+h2 code {
+    font-size: inherit;
+}
+h3 tt,
+h3 code {
+    font-size: inherit;
+}
+h4 tt,
+h4 code {
+    font-size: inherit;
+}
+h5 tt,
+h5 code {
+    font-size: inherit;
+}
+h6 tt,
+h6 code {
+    font-size: inherit;
+}
+h1 {
+    font-size: 2.25em;
+    line-height: 1.2;
+    border-bottom: 1px solid #eee;
+}
+h2 {
+    font-size: 1.75em;
+    line-height: 1.225;
+    border-bottom: 1px solid #eee;
+}
+
+/*@media print {
+    .typora-export h1,
+    .typora-export h2 {
+        border-bottom: none;
+        padding-bottom: initial;
+    }
+
+    .typora-export h1::after,
+    .typora-export h2::after {
+        content: "";
+        display: block;
+        height: 100px;
+        margin-top: -96px;
+        border-top: 1px solid #eee;
+    }
+}*/
+
+h3 {
+    font-size: 1.5em;
+    line-height: 1.43;
+}
+h4 {
+    font-size: 1.25em;
+}
+h5 {
+    font-size: 1em;
+}
+h6 {
+   font-size: 1em;
+    color: #777;
+}
+p,
+blockquote,
+ul,
+ol,
+dl,
+table{
+    margin: 0.8em 0;
+}
+li>ol,
+li>ul {
+    margin: 0 0;
+}
+hr {
+    height: 2px;
+    padding: 0;
+    margin: 16px 0;
+    background-color: #e7e7e7;
+    border: 0 none;
+    overflow: hidden;
+    box-sizing: content-box;
+}
+
+li p.first {
+    display: inline-block;
+}
+ul,
+ol {
+    padding-left: 30px;
+}
+ul:first-child,
+ol:first-child {
+    margin-top: 0;
+}
+ul:last-child,
+ol:last-child {
+    margin-bottom: 0;
+}
+blockquote {
+    border-left: 4px solid #dfe2e5;
+    padding: 0 15px;
+    color: #777777;
+}
+blockquote blockquote {
+    padding-right: 0;
+}
+table {
+    padding: 0;
+    word-break: initial;
+}
+table tr {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 0;
+}
+table tr:nth-child(2n),
+thead {
+    background-color: #f8f8f8;
+}
+table th {
+    font-weight: bold;
+    border: 1px solid #dfe2e5;
+    border-bottom: 0;
+    margin: 0;
+    padding: 6px 13px;
+}
+table td {
+    border: 1px solid #dfe2e5;
+    margin: 0;
+    padding: 6px 13px;
+}
+table th:first-child,
+table td:first-child {
+    margin-top: 0;
+}
+table th:last-child,
+table td:last-child {
+    margin-bottom: 0;
+}
+
+.CodeMirror-lines {
+    padding-left: 4px;
+}
+
+.code-tooltip {
+    box-shadow: 0 1px 1px 0 rgba(0,28,36,.3);
+    border-top: 1px solid #eef2f2;
+}
+
+.md-fences,
+code,
+tt {
+    border: 1px solid #e7eaed;
+    background-color: #f8f8f8;
+    border-radius: 3px;
+    padding: 0;
+    padding: 2px 4px 0px 4px;
+    font-size: 0.9em;
+}
+
+code {
+    background-color: #f3f4f4;
+    padding: 0 2px 0 2px;
+}
+
+.md-fences {
+    margin-bottom: 15px;
+    margin-top: 15px;
+    padding-top: 8px;
+    padding-bottom: 6px;
+}
+
+
+.md-task-list-item > input {
+  margin-left: -1.3em;
+}
+
+@media print {
+    html {
+        font-size: 13px;
+    }
+    table,
+    pre {
+        page-break-inside: avoid;
+    }
+    pre {
+        word-wrap: break-word;
+    }
+}
+
+.md-fences {
+	background-color: #f8f8f8;
+}
+#write pre.md-meta-block {
+	padding: 1rem;
+    font-size: 85%;
+    line-height: 1.45;
+    background-color: #f7f7f7;
+    border: 0;
+    border-radius: 3px;
+    color: #777777;
+    margin-top: 0 !important;
+}
+
+.mathjax-block>.code-tooltip {
+	bottom: .375rem;
+}
+
+.md-mathjax-midline {
+    background: #fafafa;
+}
+
+#write>h3.md-focus:before{
+	left: -1.5625rem;
+	top: .375rem;
+}
+#write>h4.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h5.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+#write>h6.md-focus:before{
+	left: -1.5625rem;
+	top: .285714286rem;
+}
+.md-image>.md-meta {
+    /*border: 1px solid #ddd;*/
+    border-radius: 3px;
+    padding: 2px 0px 0px 4px;
+    font-size: 0.9em;
+    color: inherit;
+}
+
+.md-tag {
+    color: #a7a7a7;
+    opacity: 1;
+}
+
+.md-toc { 
+    margin-top:20px;
+    padding-bottom:20px;
+}
+
+.sidebar-tabs {
+    border-bottom: none;
+}
+
+#typora-quick-open {
+    border: 1px solid #ddd;
+    background-color: #f8f8f8;
+}
+
+#typora-quick-open-item {
+    background-color: #FAFAFA;
+    border-color: #FEFEFE #e5e5e5 #e5e5e5 #eee;
+    border-style: solid;
+    border-width: 1px;
+}
+
+/** focus mode */
+.on-focus-mode blockquote {
+    border-left-color: rgba(85, 85, 85, 0.12);
+}
+
+header, .context-menu, .megamenu-content, footer{
+    font-family: "Segoe UI", "Arial", sans-serif;
+}
+
+.file-node-content:hover .file-node-icon,
+.file-node-content:hover .file-node-open-state{
+    visibility: visible;
+}
+
+.mac-seamless-mode #typora-sidebar {
+    background-color: #fafafa;
+    background-color: var(--side-bar-bg-color);
+}
+
+.md-lang {
+    color: #b4654d;
+}
+
+/*.html-for-mac {
+    --item-hover-bg-color: #E6F0FE;
+}*/
+
+#md-notification .btn {
+    border: 0;
+}
+
+.dropdown-menu .divider {
+    border-color: #e5e5e5;
+    opacity: 0.4;
+}
+
+.ty-preferences .window-content {
+    background-color: #fafafa;
+}
+
+.ty-preferences .nav-group-item.active {
+    color: white;
+    background: #999;
+}
+
+.menu-item-container a.menu-style-btn {
+    background-color: #f5f8fa;
+    background-image: linear-gradient( 180deg , hsla(0, 0%, 100%, 0.8), hsla(0, 0%, 100%, 0)); 
+}
+
+
+
+</style><title>index</title>
+</head>
+<body class='typora-export os-windows'><div class='typora-export-content'>
+<div id='write'  class=''><h1 id='homework-assignment-3-teaching-mastermind'><span>Homework Assignment 3: Teaching Mastermind</span></h1><p><span>For this assignment, you are to write a program that teaches optimal play for the game </span><em><span>Mastermind</span></em><span>.</span></p><h2 id='0-contents'><span>0. Contents</span></h2><div class='md-toc' mdtype='toc'><p class="md-toc-content" role="list"><span role="listitem" class="md-toc-item md-toc-h1" data-ref="n0"><a class="md-toc-inner" href="#homework-assignment-3-teaching-mastermind">Homework Assignment 3: Teaching Mastermind</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n3"><a class="md-toc-inner" href="#0-contents">0. Contents</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n5"><a class="md-toc-inner" href="#1-user-requirements">1. User Requirements</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n7"><a class="md-toc-inner" href="#11-rules">1.1. Rules</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n18"><a class="md-toc-inner" href="#12-optimal-guesses">1.2. Optimal Guesses</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n38"><a class="md-toc-inner" href="#13-specific-requirements">1.3. Specific Requirements</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n40"><a class="md-toc-inner" href="#2-starting-the-assignment">2. Starting the Assignment</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n42"><a class="md-toc-inner" href="#3-user-interface">3. User Interface</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n44"><a class="md-toc-inner" href="#31-manual-user-interface-design">3.1. Manual User Interface Design</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n52"><a class="md-toc-inner" href="#32-behavior-of-the-gui">3.2. Behavior of the GUI</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n69"><a class="md-toc-inner" href="#4-algorithms">4. Algorithms</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n71"><a class="md-toc-inner" href="#41-game-trees">4.1. Game Trees</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n92"><a class="md-toc-inner" href="#42-basic-algorithms">4.2. Basic Algorithms</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n109"><a class="md-toc-inner" href="#43-alpha-beta-pruning">4.3. Alpha-Beta Pruning</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n115"><a class="md-toc-inner" href="#44-improved-lower-bounds">4.4. Improved Lower Bounds</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n141"><a class="md-toc-inner" href="#45-data-structures">4.5. Data Structures</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n147"><a class="md-toc-inner" href="#5-software-architecture">5. Software Architecture</a></span><span role="listitem" class="md-toc-item md-toc-h2" data-ref="n151"><a class="md-toc-inner" href="#6-coding-requirements">6. Coding Requirements</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n153"><a class="md-toc-inner" href="#61-the-strategy-class">6.1. The Strategy Class</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n155"><a class="md-toc-inner" href="#611-fields">6.1.1. Fields</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n170"><a class="md-toc-inner" href="#612-all-possible-codes">6.1.2. All possible codes</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n187"><a class="md-toc-inner" href="#614-a-public-static-score-method">6.1.4. A public static Score method</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n235"><a class="md-toc-inner" href="#615-a-private-static-method-to-compare-the-sizes-of-two-goal-sets">6.1.5. A private static method to compare the sizes of two goal sets</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n237"><a class="md-toc-inner" href="#616-a-private-static-method-to-compare-the-sizes-of-the-first-elements-of-two-partitions">6.1.6. A private static method to compare the sizes of the first elements of two partitions</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n239"><a class="md-toc-inner" href="#617-a-public-static-partition-method">6.1.7. A public static Partition method</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n248"><a class="md-toc-inner" href="#618-a-public-static-tolist-method">6.1.8. A public static ToList method</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n250"><a class="md-toc-inner" href="#619-a-private-static-method-to-get-all-the-ways-of-partitioning-a-given-goal-set">6.1.9. A private static method to get all the ways of partitioning a given goal set</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n285"><a class="md-toc-inner" href="#6110-a-public-optimalguess-method-and-a-public-numberofguesses-method">6.1.10. A public OptimalGuess method and a public NumberOfGuesses method</a></span><span role="listitem" class="md-toc-item md-toc-h3" data-ref="n323"><a class="md-toc-inner" href="#62-the-userinterface-class">6.2. The UserInterface Class</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n326"><a class="md-toc-inner" href="#621-private-fields">6.2.1. private fields</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n368"><a class="md-toc-inner" href="#622-the-constructor">6.2.2. The constructor</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n383"><a class="md-toc-inner" href="#623-an-event-handler-for-the-new-game-button">6.2.3. An event handler for the "New Game" button</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n388"><a class="md-toc-inner" href="#624-an-event-handler-for-the-make-optimal-guess-button">6.2.4. An event handler for the "Make Optimal Guess" button</a></span><span role="listitem" class="md-toc-item md-toc-h4" data-ref="n401"><a class="md-toc-inner" href="#625-an-event-handler-for-the-guess-button">6.2.5. An event handler for the "Guess:" button</a></span></p></div><h2 id='1-user-requirements'><span>1. User Requirements</span></h2><p><span>Mastermind is a 2-player game in which one player (the </span><em><span>codemaker</span></em><span>) chooses a </span><em><span>code</span></em><span>, and the other player (the </span><em><span>codebreaker</span></em><span>) tries to guess the code using as few guesses as possible. After each guess, the codemaker must provide a </span><em><span>score</span></em><span>, which gives an indication of how close the guess is to being correct. The customer wants a program to help them to break codes optimally. In what follows, we give the rules of the game and define what we mean by optimal play. We then describe the requirements for the program.</span></p><h3 id='11-rules'><span>1.1. Rules</span></h3><p><span>The game consists of an even number of rounds. In successive rounds, the players alternate between the roles of codemaker and codebreaker.</span></p><p><span>To begin a round, the codemaker selects a code, hidden from the codebreaker. This code is a sequence of four pegs, each of which can be of one of six colors. For our purposes, these six colors are 0, 1, 2, 3, 4, and 5.</span></p><p><span>The codebreaker then tries to guess this code by making a series of guesses. After each guess, the codemaker scores the guess with the following two values:</span></p><ul><li><span>The number of </span><em><span>black hits</span></em><span>: The number of pegs guessed correctly - the correct color in the correct location.</span></li><li><span>The number of </span><em><span>white hits</span></em><span>: The maximum number of additional pegs that would be guessed correctly if the incorrect pegs could be reordered.</span></li></ul><p><span>For example, suppose the code is </span><code>0123</code><span>. A guess of </span><code>0011</code><span> would be scored as 1 black hit (the first peg is the correct color) and 1 white hit (the last three pegs in the guess could be reordered as </span><code>101</code><span>, yielding 1 additional match).</span></p><p><span>If a guess is scored as 4 black hits, the round ends, and the codemaker received a number of points equal to the number of guesses made by the codebreaker. Additional rules govern cases in which the codemaker incorrectly scores a guess, or if the codebreaker fails to guess the code within a specified maximum number of guesses; however, these rules are unimportant for this program.</span></p><h3 id='12-optimal-guesses'><span>1.2. Optimal Guesses</span></h3><p><span>There are 1296 possible codes. Let&#39;s refer to this set of codes as the </span><em><span>initial goal set</span></em><span>. In general, any subset of these codes can be a goal set. We can think of the initial guess as partitioning the initial goal set into nonempty subsets, each corresponding to a different score; i.e., all of the codes that result in a score of no hits are placed in one set, all those resulting in 1 black hit and no white hits are placed in another, etc. Note that because there are 14 possible scores (the score 3 black hits and 1 white hit is impossible), a guess will partition a goal set into up to 14 nonempty goal sets. The score that is actually given for the guess then selects one of these goal sets as the set of possible solutions. Subsequent guesses further partition the set of possible solutions.</span></p><p><span>Let </span><em><span>S</span></em><span> be some nonempty goal set. We say that </span><em><span>S</span></em><span> is 1-solvable if it contains exactly 1 element (we can guess this code immediately). For </span><em><span>n</span></em><span> </span><span>&gt;</span><span> 1, we say that </span><em><span>S</span></em><span> is </span><em><span>n</span></em><span>-solvable if there is a guess that partitions </span><em><span>S</span></em><span> into goal sets such that each is either empty or </span><em><span>k</span></em><span>-solvable for some </span><em><span>k</span></em><span> </span><span>&lt;</span><span> </span><em><span>n</span></em><span>. We define the </span><em><span>optimal score</span></em><span> of </span><em><span>S</span></em><span> to be the minimum </span><em><span>n</span></em><span> such that </span><em><span>S</span></em><span> is </span><em><span>n</span></em><span>-solvable. We then say that a guess is </span><em><span>optimal</span></em><span> for </span><em><span>S</span></em><span> if:</span></p><ul><li><span>it is the only element in </span><em><span>S</span></em><span>; or</span></li><li><span>it partitions </span><em><span>S</span></em><span> such that each nonempty goal set has a smaller optimal score than does </span><em><span>S</span></em><span>.</span></li></ul><p><strong><span>Example:</span></strong><span> Let </span><em><span>S</span></em><span> = {</span><code>1122</code><span>, </span><code>1212</code><span>, </span><code>2121</code><span>, </span><code>2211</code><span>}, and consider the guess </span><code>1210</code><span>. This partitions </span><em><span>S</span></em><span> into the following nonempty goal sets:</span></p><ul><li><span>1 black hit, 2 white hits: {</span><code>1122</code><span>}.</span></li><li><span>3 black hits, 0 white hits: {</span><code>1212</code><span>}.</span></li><li><span>0 black hits, 3 white hits: {</span><code>2121</code><span>}.</span></li><li><span>2 black hits, 1 white hit: {</span><code>2211</code><span>}.</span></li></ul><p><span>Each of these goal sets is 1-solvable because it contains only 1 element. </span><em><span>S</span></em><span> is therefore 2-solvable. Furthermore, it can&#39;t be 1-solvable because it contains more than 1 element. Its optimal score is therefore 2, and </span><code>1210</code><span> is an optimal guess. We also note that none of the elements of </span><em><span>S</span></em><span> is an optimal guess, as each one partitions </span><em><span>S</span></em><span> into goals sets such that the set with 2 black hits and 2 white hits has 2 elements.</span></p><p><span>Our definition of an optimal guess focuses on the worst case. For example, the code that you will write can be used to show that the initial goal set has an optimal score of 5. This means that there is a strategy to break any code in at most 5 guesses. This definition is not the only way of defining optimal guesses. For example, we might consider finding a strategy that minimizes the </span><em><span>expected</span></em><span> number of guesses, assuming codes are chosen randomly with uniform distribution. However, this assumption might not be valid when the codemaker is human. Defining optimality based on the worst case avoids the need to make any assumptions about how the code is chosen.</span></p><h3 id='13-specific-requirements'><span>1.3. Specific Requirements</span></h3><p><span>The customer is only interested in a single round of play, where the user is the codebreaker. The code should be chosen randomly from a uniform distribution and kept hidden from the user. The user should then be allowed to make a series of guesses. As each guess is made, the program should determine if the guess is optimal, as defined in </span><a href='#12-optimal-guesses'><span>Section 1.2. Optimal Guesses</span></a><span>. If not, the user should be given the option of trying a different guess instead. For any guess, the user must also be given the option of allowing the program to make an optimal guess. Once the user makes a final decision on a guess, the score of that guess should be reported.</span></p><h2 id='2-starting-the-assignment'><span>2. Starting the Assignment</span></h2><p><span>Create a GitHub repository using the link provided in the Canvas assignment and clone it to your local machine. This repository should contain a Visual Studio solution containing a new Windows Forms Application with an additional unit test project, </span><strong><span>Ksu.Cis300.MastermindTeacher.Tests</span></strong><span>. Note that no code is provided other than the unit test code. You will need to write the entire program, including designing the GUI.</span></p><h2 id='3-user-interface'><span>3. User Interface</span></h2><p><span>In this section, we will describe the look and behavior of the GUI that you are to design. We will first outline what you will need to build using the Design window. Then we will describe the required behavior of the GUI. You will need to provide code to implement this behavior (see </span><a href='#6-coding-requirements'><span>Section 6. Coding Requirements</span></a><span>). The </span><a href=''><span>demo video</span></a><span> also illustrates the expected look and behavior.</span></p><h3 id='31-manual-user-interface-design'><span>3.1. Manual User Interface Design</span></h3><p><span>Using the Design window, design a GUI resembling the following:</span></p><p><img src="design-window.png" alt="The GUI as built in the Design window." style="zoom:67%;" /></p><p><span>The above only shows a part of the GUI. Modifications will be made by code (see </span><a href='#6-coding-requirements'><span>Section 6. Coding Requirements</span></a><span>). </span></p><p><span>At the top is a </span><strong><span>ToolStrip</span></strong><span> containing two </span><strong><span>Button</span></strong><span>s. The &quot;New Game&quot; button is initially enabled, but the &quot;Make Optimal Guess&quot; button is initially disabled. Filling the remainder of the window is a </span><strong><span>SplitContainer</span></strong><span>. Adding it to the form will cause it to fill the remainder of the window. To cause it to split horizontally, set its </span><strong><span>Orientation</span></strong><span> property to </span><strong><span>Horizontal</span></strong><span>. You can then drag the bar that splits the container as you wish, but its final location will be set by code (see </span><a href='#6-coding-requirements'><span>Section 6. Coding Requirements</span></a><span>).</span></p><p><span>In the upper-left corner of the upper panel of the </span><strong><span>SplitContainer</span></strong><span>, add a </span><strong><span>FlowLayoutPanel</span></strong><span>. To this </span><strong><span>FlowLayoutPanel</span></strong><span>, add the &quot;Guess:&quot; button. Then set the </span><strong><span>FlowLayoutPanel</span></strong><span>&#39;s </span><strong><span>AutoSize</span></strong><span> property to </span><strong><span>True</span></strong><span> and its </span><strong><span>AutoSizeMode</span></strong><span> property to </span><strong><span>GrowAndShrink</span></strong><span>.</span></p><p><span>In lower panel of the </span><strong><span>SplitContainer</span></strong><span>, add a </span><strong><span>ListView</span></strong><span>, and set its </span><strong><span>Dock</span></strong><span> property so that it fills the panel. Set its </span><strong><span>View</span></strong><span> and </span><strong><span>GridLines</span></strong><span> properties to display the contents as a grid whose rows and columns are separated by lines. Then edit the Columns property, either through its entry in the Properties list or by clicking &quot;Edit Columns...&quot; below the Properties list. In the resulting dialog, use the &quot;Add&quot; button to add a column. Change the </span><strong><span>(Name)</span></strong><span> property of each column header so that it follows the </span><a href='https://cis300.cs.ksu.edu/appendix/style/naming/index.html'><span>naming convention for GUI controls</span></a><span>, and change each </span><strong><span>Text</span></strong><span> property to the text to display in the column header. You can also adjust the </span><strong><span>Width</span></strong><span> properties to make each header&#39;s text fully visible, but the final column widths will be set by code (see </span><a href='#6-coding-requirements'><span>Section 6. Coding Requirements</span></a><span>).</span></p><p><span>Finally, resize the form to an appropriate size.</span></p><h3 id='32-behavior-of-the-gui'><span>3.2. Behavior of the GUI</span></h3><p><span>Once the program is finished, it should initially open a window resembling the following:</span></p><p><img src="initial-gui.png" referrerpolicy="no-referrer" alt="The initial GUI."></p><p><span>At this point, the only enabled control is the &quot;New Game&quot; button. Clicking this button at any time should enable the other two buttons and all four </span><strong><span>NumericUpDown</span></strong><span>s and generate a code randomly, keeping this code hidden from the user.</span></p><p><span>The user may then repeatedly do one of the following actions:</span></p><ul><li><p><span>Make a guess by entering the four colors into the </span><strong><span>NumericUpDown</span></strong><span>s and clicking the &quot;Guess:&quot; button. If the guess is not an optimal guess (see </span><a href='#12-optimal-guesses'><span>Section 1.2. Optimal Guesses</span></a><span>), a </span><strong><span>MessageBox</span></strong><span> resembling the following should be displayed:</span>
+<img src="suboptimal-message.png" referrerpolicy="no-referrer" alt="A MessageBox indicating a guess is suboptimal.">
+<span>If the user closes the </span><strong><span>MessageBox</span></strong><span> with the &quot;No&quot; button, nothing on the GUI should change. If the user closes it with the &quot;Yes&quot; button, or if this </span><strong><span>MessageBox</span></strong><span> wasn&#39;t shown because the guess was optimal, the following changes should be made to the GUI:</span></p><ul><li><span>A value 1 greater than the last value in the &quot;Play&quot; column (or 1 if the &quot;Play&quot; column is empty) should be added to that column.</span></li><li><span>The user&#39;s guess should be added to the &quot;Guess&quot; column.</span></li><li><span>The score of this guess should be added to the last two columns. If the number of black hits is 4, the &quot;Make Optimal Guess&quot; and &quot;Guess:&quot; buttons, as well as all four </span><strong><span>NumericUpDown</span></strong><span>s, should be disabled.</span></li></ul></li><li><p><span>Click the &quot;Make Optimal Guess&quot; button. The program will then choose an optimal guess and update the GUI as above, using the chosen guess in place of a guess by the user.</span></p></li></ul><h2 id='4-algorithms'><span>4. Algorithms</span></h2><p><span>In this section, we&#39;ll give the algorithms for finding optimal guesses and for determining whether a given guess is optimal. We first discuss the concept of a </span><em><span>game tree</span></em><span> for a closely-related game. We then present an algorithms for traversing a game tree to find an optimal guess or to determine whether a given guess is optimal. Next, we give some optimizations to the algorithms. Finally, we discuss appropriate data structures for implementing these algorithms.</span></p><h3 id='41-game-trees'><span>4.1. Game Trees</span></h3><p><span>Consider the following variation of the game. Instead of selecting a code initially, the codemaker delays selecting the code as long as possible. For each guess, the codemaker&#39;s responsibility is to assign a score such that at least one code satisfies all of the scores up to that point. Thus, while the codebreaker is trying to minimize the number of guesses, the codemaker is actively trying to maximize the number of guesses. To find an optimal guess, we need to determine which guess the codebreaker will make, on the assumption that both players are playing optimally.</span></p><p><span>Defining the game in this way makes it similar to other two-player perfect-knowledge games. Specifically, the players alternate making plays, with one player (the codebreaker) trying to minimize the score, and the other player (the codemaker) trying to maximize the score. The main difference from most two-player perfect-knowledge games is that the two players make their plays under different rules.</span></p><p><span>Having defined this game variation, we can now define a game tree for any position in this game. When it is the codebreaker&#39;s turn to play, the game position will be the goal set consisting of all codes consistent with the scores given to all the guesses made up to this point. We will call a node representing such a game position a </span><em><span>minimizing</span></em><span> node, as the codebreaker is trying to minimize the number of guesses. When it is the codemaker&#39;s turn, the game position will be the partition of the goal set implied by the codebreaker&#39;s last guess (see </span><a href='#12-optimal-guesses'><span>Section 1.2. Optimal Guesses</span></a><span>). We will call a node representing such a game position a </span><em><span>maximizing</span></em><span> node, as the codemaker is trying to maximize the number of guesses. A minimizing node at which the game isn&#39;t over will have 1296 children - the partitions resulting from all possible guesses. A maximizing node will have from 1 to 14 children - the goal sets selected by all legal scorings of the guess. The leaves are the minimizing nodes for which the last score was 4 black hits.</span></p><p><strong><span>Example:</span></strong><span> Suppose it is the codebreaker&#39;s turn to play, and that the current goal set is {</span><code>1122</code><span>, </span><code>1212</code><span>, </span><code>2121</code><span>, </span><code>2211</code><span>}. Here is a portion of the game tree from this position:</span></p><p><img src="game-tree.png" referrerpolicy="no-referrer" alt="A portion of a game tree."></p><p><span>Minimizing nodes are shown with sharp corners, and maximizing nodes are shown with rounded corners. Leaves are shown with heavy borders. For the minimizing nodes, most of the children are not shown, as there are 1296 of them. The children shown are most relevant for the discussion that follows. On the other hand, all of the children of maximizing nodes are shown.</span></p><p><span>One difficulty in dealing with game trees is that they are infinite. Consider, for example, the node reached by guessing </span><code>0000</code><span> at the root and scoring no hits. This node is identical to the root; hence, its children will be the same as the root&#39;s children. Consequently, an infinite path consisting of repeatedly guessing </span><code>0000</code><span> and scoring no hits occurs in this tree. This path corresponds to the codebreaker repeatedly guessing </span><code>0000</code><span> forever. </span></p><p><span>Though infinite paths are present in the tree, they have no utility in computing an optimal guess. We can eliminate them by ignoring the following children of any minimizing node:</span></p><ul><li><span>If the minimizing node has a goal set with size larger than 1, ignore any child that does not contain at least one smaller goal set than its parent&#39;s goal set (note that if at least one goal set is smaller, all goal sets in the partition will be smaller). </span></li><li><span>If the minimizing node has a goal set of size 1, ignore any child other than the one reached by guessing the only member of the goal set.</span></li></ul><p><span>These children represent wasted guesses - guesses that can provide no new information. When we eliminate these nodes, the sizes of goal sets always decrease as we go from minimizing nodes to maximizing nodes until a goal set of size 1 is reached. Furthermore, they stay the same size when going from maximizing nodes to minimizing nodes. After a goal set of size 1 is reached, the only element of the goal set is guessed, and the game comes to an end. Because minimizing and maximizing nodes alternate, all paths must be finite.</span></p><p><span>Having simplified the game tree to a finite tree, we can now see how it can be used to determine an optimal guess. At any leaf, the code has been broken; hence, no more guesses are needed. We therefore say the </span><em><span>value</span></em><span> of a leaf is 0. Because the codemaker is trying to maximize the number of guesses, the value of a maximizing node is the maximum of the values of its children. Because the codebreaker is trying to minimize the number of guesses, the value of a minimizing node other than a leaf is the minimum of the values of its children, plus 1 to account for the guess made to reach the child. Using these definitions, the value of a minimizing node will always give the optimal score of the position it represents.</span></p><p><span>We can now evaluate the root of the above tree to give us the optimal guess. We will work from the bottom, although the algorithm we present below works from the root using recursion. The parents of most of the leaves shown in this tree have only a single child; hence, these maximizing nodes have values of 0. The parents of these maximizing nodes all have only a single child, hence, these minimizing nodes all have values of 1. Consider the two maximizing nodes (shown near the center of the tree) containing two goal sets, {</span><code>1212</code><span>} and {</span><code>2121</code><span>}. Each of these nodes has one child with a value of 0 and another child with a value of 1. Maximizing, we see that each of these nodes has a value of 1. Their parent, a minimizing node, has a value 1 more than the minimum of these two values; i.e., it has a value of 2. (Actually, this node has other children that are not shown, but each of them also has a value of 1.)</span></p><p><span>We have now evaluated every node shown in this tree except the root and its two children (ignoring the rightmost child shown). The children of the maximizing node reached by the guess </span><code>1210</code><span> all have values of 1; hence, this node has a value of 1. The children of the other maximizing node have values of 0, 2, and 1, respectively; hence, this node has a value of 2. The minimum of these two values is 1 (and none of the root&#39;s other children has a value less than 1); hence, the value of the root is 2. An optimal play is therefore </span><code>1210</code><span> - one leading to a child with minimum value.</span></p><p><span>Before we formalize the above ideas into algorithms, let&#39;s make two additional simplifications of the tree. First, note that any minimizing node whose goal set contains only one element will have a value of 1. We can therefore avoid searching its child and grandchild by immediately giving such a node a value of 1. Having made this simplification, we observe that the only need a maximizing node has for the scores of its goal sets is to determine whether a child is a leaf (this happens when the goal set has a score of 4 black hits). However, because maximizing nodes will always contain some goal sets with scores other than 4 black hits (due to the first simplification), and because a value of 0 will always be the smallest value of any of the children, there is no need to include a goal set having a score of 4 black hits within a maximizing node. This has the effect of eliminating all minimizing nodes with values of 0.</span></p><p><span>The above game tree with the simplifications described above is shown below. Node values are shown to the right of the nodes. Keep in mind that the minimizing nodes with a goal set containing more than one element still have other children that aren&#39;t shown, though they now have fewer than 1296 children.</span></p><p><img src="simplified-tree.png" referrerpolicy="no-referrer" alt="A simplified game tree."></p><h3 id='42-basic-algorithms'><span>4.2. Basic Algorithms</span></h3><p><span>In this section we present the basic algorithms for determining the best guess and value (or optimal score) at a minimizing node and for determining the value of a maximizing node. In the next two sections, we will give optimizations to these algorithms. These two algorithms will be </span><em><span>mutually recursive</span></em><span>; i.e., they will call each other. We can think of mutually recursive algorithms in the same way as we think about recursive algorithms - as long as the calls to the other algorithm are on children of the current node, we can assume they accomplish what we&#39;ve specified that they accomplish. (We could combine them into a single recursive algorithm that contains two cases, one for minimizing nodes and one for maximizing nodes, but defining two separate algorithms is cleaner).</span></p><p><span>These two algorithms are based on the </span><em><span>minimax</span></em><span> strategy for processing game trees for various 2-player games. The strategy is often described as two mutually recursive algorithms: one for minimizing nodes, and one for maximizing nodes. These two algorithms are usually quite similar; however, because the two players of our game play by different rules, our algorithms will have significant differences from each other. Another difference from the more typical minimax strategy is that for most games, the game tree is too large to search all the way to the leaves; hence, an </span><em><span>evaluation function</span></em><span> is typically used to estimate the value of sufficiently-deep nodes. Because our algorithms will search all the way to the leaves of the simplified tree, we won&#39;t need an evaluation function.</span></p><p><span>The minimization algorithm will take as its input a goal set. It will return two values: the optimal score for the given goal set and an optimal guess. Note that the optimal score is the same as the value of the minimizing node representing the given goal set in a game tree.</span></p><p><span>The maximization algorithm will take as its input a collection of disjoint goal sets. It will return the maximum of the optimal scores of the given goal sets. Note that this value is the same as the value of the maximizing node representing this collection in a game tree. Note also that if we already know the optimal score of some goal set containing more than one element, we can use this algorithm to determine if a given guess is optimal for that goal set: We first partition the goal set according to the given guess, then, ignoring any goal set in this partition that corresponds to 4 black hits, we pass the resulting partition to the maximization algorithm. If this algorithm returns a value less than the optimal score, the given guess is optimal; otherwise, it isn&#39;t.</span></p><p><span>Before presenting the algorithms, we first note that they will not use any data structure representing the game tree. Instead, the structure of the mutual calls will correspond to the game tree; i.e., wherever a minimizing node </span><em><span>x</span></em><span> has a maximizing node </span><em><span>y</span></em><span> as one of its children, the minimization algorithm, when called with the goal set represented by </span><em><span>x</span></em><span>, will call the maximizing algorithm, passing the collection of goal sets represented by </span><em><span>y</span></em><span>.</span></p><p><span>The basic minimization algorithm is as follows:</span></p><ol start='' ><li><span>If the given goal set has only 1 element, return that element as the guess and 1 as the optimal score.</span></li><li><span>Build a collection of key-value pairs containing as its keys all possible guesses that partition the given goal set into smaller goal sets. The value associated with each key should be the resulting partition.</span></li><li><span>Call the maximization algorithm on each key-value pair in this collection. As this loop iterates, keep track of the minimum returned value plus 1 and the key associated with the partition giving this minimum value. </span></li><li><span>Return the minimum obtained in Step 3 as the optimal score and the key as the optimal guess.</span></li></ol><p><span>The basic maximization algorithm iterates through the goal sets in the given partition calling the minimization algorithm on each, and maintaining the maximum optimal score returned by that algorithm. It returns this maximum optimal score.</span></p><p><span>While these algorithms are satisfactory for reasonably small game trees, they will not complete in a reasonable amount of time for the initial goal set, or even for the partition resulting from an initial guess. The next two sections focus on how we can avoid searching large portions of a game tree and still arrive at correct results.</span></p><h3 id='43-alpha-beta-pruning'><span>4.3. Alpha-Beta Pruning</span></h3><p><span>As we mentioned in </span><a href='#12-optimal-guesses'><span>Section 1.2. Optimal Guesses</span></a><span>, the optimal score for the initial goal set is 5. Furthermore, as the user makes each guess, it makes sense to evaluate the optimal score for the resulting goal set, as a lucky guess might reduce the optimal score by more than 1. Maintaining this optimal score will make it easy to check whether a subsequent guess is optimal by using the maximization algorithm, as outlined above. Because we will always have the optimal score of the root of the game tree, we can use it to  optimize the maximization algorithm. Specifically, if the maximization algorithm ever evaluates a child whose optimal score is at least as large as the optimal score for the root, we know that the guess being evaluated is not optimal. There is therefore no point in continuing the evaluation.</span></p><p><span>We can generalize this idea by adding an extra parameter to both algorithms. This parameter gives an upper bound on the useful values that could be returned by the algorithm. Thus, if the maximization algorithm ever attains a value greater than or equal to this maximum, it can stop its evaluation, as whatever value it returns won&#39;t be used by its parent.</span></p><p><span>For example, consider again the game tree shown at the end of </span><a href='#41-game-trees'><span>Section 4.1. Game Trees</span></a><span>. After the root has evaluated the guess </span><code>1210</code><span>, we know that the optimal score is no more than 2. Because we will add 1 to whatever is returned by the maximization algorithm, we can therefore pass 1 as an upper-bound when evaluating the guess </span><code>1122</code><span>. When the maximization algorithm then evaluates 2 black hits and 2 white hits, the value obtained is 2. There is now no point in evaluating 4 white hits, as whatever is returned will be at least 2, and the minimization algorithm won&#39;t use it.</span></p><p><span>In a similar way, we can also include a lower bound parameter for each algorithm. Whenever the minimizing algorithm attains a minimum value less than or equal to this lower bound, it can stop its evaluation, as the result it computes won&#39;t be used.</span></p><p><span>These optimizations are called </span><em><span>alpha-beta pruning</span></em><span> because the lower- and upper-bounds have traditionally been called </span>&alpha;<span> and </span>&beta;<span>, respectively. We can make this pruning more effective by first evaluation children that are more likely to be optimal. Thus, for the maximization algorithm, it makes sense to consider the goal sets from largest to smallest, as a larger goal set is more likely to have a larger optimal score. For the minimization algorithm, it makes sense to consider first the guesses that yield the partitions having the smallest maximum-sized goal sets, as these are more likely to have a smaller optimal score.</span></p><h3 id='44-improved-lower-bounds'><span>4.4. Improved Lower Bounds</span></h3><p><span>In some cases, we can improve the lower bounds we use in alpha-beta pruning by showing that any goal set whose size exceeds a certain threshold must have an optimal score of at least some minimum value. An easy example is that any goal set of size greater than 1 must clearly have an optimal score of at least 2. </span></p><p><span>Now suppose that some goal size has a size greater than 14. Any guess will partition this goal set into at most 14 goal sets. By </span><a href='https://www2.edc.org/makingmath/mathtools/pigeonhole/pigeonhole.asp'><span>the pigeonhole principle</span></a><span>, at least one of these goal sets has a size greater than 1, and hence has an optimal score of at least 2. The original goal set must therefore have an optimal size of at least 3.</span></p><p><span>Finally, suppose that some goal set has a size greater than 175. Again, any guess will partition this goal set into at most 14 goal sets. Furthermore, the goal set resulting from 4 black hits can contain at most 1 element. Consider the goal set resulting from 2 black hits and 2 white hits. There are 6 ways that the 2 black hits can be selected. Once these are selected, the only code with 2 white hits is the one in which the colors of the 2remaining pegs are swapped. Consequently, this goal set can contain at most 6 elements. The other 12 goal sets must then contain a total of more than 168 elements. Because 12 </span>&times;<span> 14 = 168, again by the pigeonhole principle, at least one of these goal sets must contain more than 14 elements. As we showed above, this goal set must have an optimal size of at least 3; hence, the original goal set must have an optimal size of at least 4.</span></p><p><span>We can utilize these improved lower bounds within the maximization algorithm by initializing the maximum  being found to the maximum of the given lower bound and the appropriate improved lower bound identified above.</span></p><p><span>Let&#39;s now formalize the optimized algorithms. We&#39;ll start by revising their specifications.</span></p><p><span>The minimization algorithm will take as its input a goal set, a lower bound on any useful optimal score, and an upper bound on any useful optimal score. The lower bound must be less than the upper bound. It will again return two values. One of these values will be the optimal score, provided the optimal score is greater than the lower bound and less than the upper bound. In this case, the second value returned is an optimal guess. If the optimal score is less than or equal to the lower bound, instead of returning an optimal score, it will return some value less than or equal to the lower bound. Likewise, if the optimal score is greater than or equal to the upper bound, it will return some value greater than or equal to the upper bound. In either of these last two cases, the guess returned may not be optimal. </span></p><p><span>The maximization algorithm will take as its input a collection of disjoint goal sets ordered from largest to smallest, a lower bound on any useful optimal score, and an upper bound on any useful optimal score. The lower bound must be less than the upper bound. It will return the maximum of the optimal scores of the given goal sets, provided this maximum is greater than the lower bound and less than the upper bound. If this maximum is less than or equal to the lower bound, some value less than or equal to the lower bound will be returned. If this maximum is greater than or equal to the upper bound, some value greater than or equal to the upper bound will be returned.</span></p><p><span>For the minimization algorithm, we will accumulate the minimum of the values returned by the maximization algorithm, then add 1 to this minimum at the end. It therefore will make sense to decrease the given lower- and upper-bounds by 1. Because any value returned by the maximization algorithm will be an upper-bound on any useful subsequent values returned by this algorithm, we can use the upper-bound to accumulate the minimum. The minimization algorithm then operates as follows:</span></p><ol start='' ><li><span>If the given goal set has only 1 element, return that element as the guess and 1 as the optimal score.</span></li><li><span>Decrease both the lower- and upper-bound by 1.</span></li><li><span>Build a collection of key-value pairs containing as its keys all possible guesses that partition the given goal set into smaller goal sets. The value associated with each key should be the resulting partition. The goal sets within each partition should be sorted in descending order of their sizes, and the partitions within the collection should be sorted in ascending order of the sizes of the first goal set in each partition.</span></li><li><span>Call the maximization algorithm on each key-value pair in this collection. As this loop iterates, update the upper-bound to the minimum returned value, and keep track of the key associated with the partition giving this minimum value (initialize this key to the first key in the collection). If the upper-bound ever becomes less than or equal to the lower-bound, exit this loop. </span></li><li><span>Return the upper-bound plus 1 as the optimal score and the key saved in Step 4 as the optimal guess.</span></li></ol><p><span>For the maximization algorithm, we accumulate the maximum of the values returned by the minimization algorithm as the lower-bound because any value returned by the minimization algorithm will be a lower-bound on any useful subsequent values returned by this algorithm. The maximization then algorithm operates as follows:</span></p><ol start='' ><li><span>Update the lower-bound to the maximum of its given value and the appropriate improved lower bound for the first goal set in the given partition as described earlier in this section.</span></li><li><span>Iterate through the goal sets in the given partition calling the minimization algorithm on each, and maintaining the maximum optimal score returned by that algorithm as the lower-bound. Prior to each call, if the lower-bound is greater than or equal to the given upper-bound, return this lower-bound. </span></li><li><span>Return the lower-bound.</span></li></ol><h3 id='45-data-structures'><span>4.5. Data Structures</span></h3><p><span>In this section, we discuss the data structures that will be used to implement the above algorithms.</span></p><p><span>Each code (or guess) will be implemented using a </span><strong><span>string</span></strong><span> of four characters, each of which is &#39;0&#39;, &#39;1&#39;, &#39;2&#39;, &#39;3&#39;, &#39;4&#39;, or &#39;5&#39;. We will implement each goal set using a </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span>, where each </span><strong><span>string</span></strong><span> is a code. </span></p><p><span>When using a guess to form a partition, we need to be able to access the goal set containing the codes resulting in a given score. To facilitate efficient accesses, we use a </span><strong><span>Dictionary</span><span>&lt;</span><span>(int, int), List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span> to build a partition. The keys in this dictionary are the scores in the form, (</span><em><span>black-hits</span></em><span>, </span><em><span>white-hits</span></em><span>). The value associated with a key is the goal set resulting from that score.</span></p><p><span>We also need to be able to sort a partition. After the partition is built, we have no need for the score of each partition. It therefore makes sense to copy the values from the dictionary representing the partition to a </span><strong><span>List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span> at this point. Each element of this list is a goal set in the partition.</span></p><p><span>Finally, Step 2 of the minimization algorithm needs to build a collection of key-value pairs, where each key is a guess, and its associated value is the partition resulting from this guess. We could use a dictionary, but after the collection is built, we&#39;ll need to sort it. Therefore, it makes more sense to use a </span><strong><span>List</span><span>&lt;</span><span>KeyValuePair</span><span>&lt;</span><span>string, List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span><span>&gt;</span><span>&gt;</span></strong><span>.</span></p><h2 id='5-software-architecture'><span>5. Software Architecture</span></h2><p><span>Your program should contain two classes, as shown in the following class diagram:</span></p><p><img src="ClassDiagram.png" alt="The software architecture." style="zoom:67%;" /></p><p><strong><span>UserInterface</span></strong><span> implements the GUI. Not all of the </span><strong><span>private</span></strong><span> methods required for this class are shown in the class diagram - see </span><a href='#6.1. The UserInterface Class'><span>Section 6.1. The UserInterface Class</span></a><span> for more information. </span><strong><span>Strategy</span></strong><span> is a </span><strong><span>static</span></strong><span> class containing methods and constants for finding and checking optimal plays, as well as for scoring plays and partitioning goal sets. You will need to implement both of these classes, as outlined in the coding requirements that follow. In order for the provided unit tests to compile, all </span><strong><span>public</span></strong><span> members of the </span><strong><span>Strategy</span></strong><span> class must match those shown in the class diagram; otherwise, you may use different names as long as they obey the </span><a href='https://cis300.cs.ksu.edu/appendix/style/naming/index.html'><span>naming conventions</span></a><span> for this class.</span></p><h2 id='6-coding-requirements'><span>6. Coding Requirements</span></h2><p><span>Specific requirements for each of the classes are given in what follows.</span></p><h3 id='61-the-strategy-class'><span>6.1. The Strategy Class</span></h3><p><span>This class should be </span><strong><span>static</span></strong><span>; hence, all of its fields and methods must be either </span><strong><span>static</span></strong><span> or </span><strong><span>const</span></strong><span>. It needs seven fields, five </span><strong><span>public</span></strong><span> methods, and four </span><strong><span>private</span></strong><span> methods. These are described in what follows.</span></p><h4 id='611-fields'><span>6.1.1. Fields</span></h4><p><span>Six of the fields needed for this class are described here. Because the seventh field needs to be initialized with a method you will write, it is described in the next section. You will need to define the following fields:</span></p><ul><li><strong><span>public static readonly int</span></strong><span> </span><code>Colors</code><span>: Gives the number of colors used in codes (6).</span></li><li><strong><span>public static readonly int</span></strong><span> </span><code>Pegs</code><span>: The number of pegs comprising a code (4).</span></li><li><strong><span>public static readonly int</span></strong><span> </span><code>OptimalScore</code><span>: The optimal score for a new game (5).</span></li><li><strong><span>public static readonly string</span></strong><span> </span><code>InitialOptimalGuess</code><span>: An optimal guess for the initial goal set. While any guess that has at least two distinct colors will work, we use </span><code>&quot;0011&quot;</code><span> because it minimizes the size of the largest goal set in the resulting partition.</span></li><li><span>A </span><strong><span>private const char</span></strong><span> giving the smallest color (</span><code>&#39;0&#39;</code><span>).</span></li><li><span>A </span><strong><span>private static readonly int[</span>&nbsp;<span>]</span></strong><span> initialized to </span><code>{ 0, 0, 1, 14, 175 }</code><span>. Thus, if a goal set has size greater than value at location </span><em><span>i</span></em><span>, the optimal score of that goal set is at least </span><em><span>i</span></em><span> (see </span><a href='#44-improved-lower-bounds'><span>Section 4.4. Improved Lower Bounds</span></a><span>). Location 0 will be unused.</span></li></ul><h4 id='612-all-possible-codes'><span>6.1.2. All possible codes</span></h4><p><span>You will need a field in which to store all possible codes; however, it will need to be initialized using a </span><strong><span>private</span></strong><span> method. Therefore, we will first describe the method, then the field.</span></p><p><span>The method needs no parameters and should return a </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> giving all possible codes (i.e., the initial goal set). Begin by initializing a </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> to contain the empty string as its only element. Then for each peg:</span></p><ul><li><p><span>Initialize a second </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> to an empty list.</span></p></li><li><p><span>For each </span><strong><span>string</span></strong><span> in the original list:</span></p><ul><li><p><span>For each color:</span></p><ul><li><span>Concatenate the color and the </span><strong><span>string</span></strong><span>, and add the result to the second list.</span></li></ul></li></ul></li><li><p><span>Replace the original list with the second list by copying a reference.</span></p></li></ul><p><span>Apart from this method, define a </span><strong><span>public static readonly List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> </span><code>AllCodes</code><span>, and initialize it using this method.</span></p><h4 id='614-a-public-static-score-method'><span>6.1.4. A public static Score method</span></h4><p><span>This method should take as its parameters two </span><strong><span>string</span></strong><span>s representing codes. One of these codes will be a guess, and the other will be a goal code, but as far as the coding is concerned, it doesn&#39;t matter which is which. It should return an </span><strong><span>(int, int)</span></strong><span> indicating the score of the guess, where the first </span><strong><span>int</span></strong><span> is the number of black hits, and the second is the number of white hits.</span></p><p><span>While computing the number of black hits is straightforward, computing the number of white hits is trickier. It turns out to be easier to compute number of total hits (i.e., the sum of the number of black hits and the number of white hits) than to compute the number of white hits directly. The number of white hits can then be computed by subtracting the number of black hits from the number of total hits.</span></p><p><span>The number of total hits for a given color is the minimum of the number of occurrences of that color in the two given codes. The number of total hits is then the sum the number of total hits for each color. For example, suppose the given codes are </span><code>&quot;0211&quot;</code><span> and </span><code>&quot;1221&quot;</code><span>. The following table shows the number of occurrences of each color in each code, and the minimum number of occurrences for each color:</span></p><figure><table><thead><tr><th><span>Color</span></th><th><span>0211</span></th><th><span>1221</span></th><th><span>Minimum</span></th></tr></thead><tbody><tr><td><span>0</span></td><td><span>1</span></td><td><span>0</span></td><td><span>0</span></td></tr><tr><td><span>1</span></td><td><span>2</span></td><td><span>2</span></td><td><span>2</span></td></tr><tr><td><span>2</span></td><td><span>1</span></td><td><span>2</span></td><td><span>1</span></td></tr><tr><td><span>3</span></td><td><span>0</span></td><td><span>0</span></td><td><span>0</span></td></tr><tr><td><span>4</span></td><td><span>0</span></td><td><span>0</span></td><td><span>0</span></td></tr><tr><td><span>5</span></td><td><span>0</span></td><td><span>0</span></td><td><span>0</span></td></tr></tbody></table></figure><p><span>The total number of hits is then 3, the sum of the values in the last column above. Because the number of black hits is 2 (indices 1 and 3), the number of white hits is 1. </span></p><p><span>We therefore need to count the number of occurrences of each color in each code. To do this, we need two arrays of counters, one for each code. The size of each array should be the number of colors. We also need a counter to keep track of the number of black hits. Then for each location within the codes:</span></p><ul><li><span>Increment the appropriate counter for each of the codes. To do this, you&#39;ll need to convert a </span><strong><span>char</span></strong><span> such as &#39;2&#39; to an array index such as 2 (recall how you did this for Homework Assignment 1).</span></li><li><span>If the two colors at the current location are the same, increment the number of black hits.</span></li></ul><p><span>Once this loop has finished, iterate through the locations within the counter arrays to add up the number of total hits (see above). Then compute the number of white hits by subtracting the number of black hits from the number of total hits.</span></p><h4 id='615-a-private-static-method-to-compare-the-sizes-of-two-goal-sets'><span>6.1.5. A private static method to compare the sizes of two goal sets</span></h4><p><span>This method should take two parameters of type </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span>. It should return an </span><strong><span>int</span></strong><span> that is negative if the first list is longer than the second list, 0 if they have the same size, or positive otherwise. This method will be used by a </span><strong><span>List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span>&#39;s </span><strong><span>Sort</span></strong><span> method to sort its elements in descending order of their sizes.</span></p><h4 id='616-a-private-static-method-to-compare-the-sizes-of-the-first-elements-of-two-partitions'><span>6.1.6. A private static method to compare the sizes of the first elements of two partitions</span></h4><p><span>This method should take two parameters of type </span><strong><span>KeyValuePair</span><span>&lt;</span><span>string, List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span><span>&gt;</span></strong><span>. It should return an </span><strong><span>int</span></strong><span> that is negative if the first element of the value in the first pair is shorter than the first element of the value in the second pair, 0 if these two elements have the same size, or positive otherwise. This method will be used by a </span><strong><span>List</span><span>&lt;</span><span>KeyValuePair</span><span>&lt;</span><span>string, List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span><span>&gt;</span><span>&gt;</span></strong><span>&#39;s </span><strong><span>Sort</span></strong><span> method to sort its elements in ascending order of the sizes of the first elements of their values.</span></p><h4 id='617-a-public-static-partition-method'><span>6.1.7. A public static Partition method</span></h4><p><span>This method should take as its parameters a </span><strong><span>LIst</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> giving a goal set and a </span><strong><span>string</span></strong><span> giving a guess. It should return a </span><strong><span>Dictionary</span><span>&lt;</span><span>(int, int), List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span> giving the partition produced by applying the given guess to the given goal set (see </span><a href='#45-data-structures'><span>Section 4.5. Data Structures</span></a><span>). Begin by constructing a new dictionary. Then for each code in the given goal set, if the code is different from the given guess:</span></p><ul><li><span>Compute the score of the guess relative to the code.</span></li><li><span>Retrieve the value associated with this score in the dictionary. If the dictionary doesn&#39;t already contain this score as a key, add this key with an empty list as its value.</span></li><li><span>Add the code to the retrieved list (or the empty list added).</span></li></ul><h4 id='618-a-public-static-tolist-method'><span>6.1.8. A public static ToList method</span></h4><p><span>This method should take as its only parameter a </span><strong><span>Dictionary</span><span>&lt;</span><span>(int, int), List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span> as returned by the above method. It should return a </span><strong><span>List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span> containing all of the values in the given dictionary, sorted in ascending order of the sizes of their first elements. You can use a </span><strong><span>foreach</span></strong><span> loop to iterate through either the key-value pairs in the dictionary or through the </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span>s in the dictionary&#39;s </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.values?view=net-6.0#system-collections-generic-dictionary-2-values'><strong><span>Values</span></strong></a><span> property. After copying all of the values in the dictionary to a list, sort the list using its </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.sort?view=net-6.0#system-collections-generic-list-1-sort(system-comparison((-0)'><strong><span>Sort</span></strong></a><span> method. This method takes as its parameter a </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.comparison-1?view=net-6.0'><strong><span>Comparison</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong></a><span>, which is a </span><em><span>delegate</span></em><span> type - a reference to a method. Here you can simply provide there name of the above method that compares </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span>s.</span></p><h4 id='619-a-private-static-method-to-get-all-the-ways-of-partitioning-a-given-goal-set'><span>6.1.9. A private static method to get all the ways of partitioning a given goal set</span></h4><p><span>This method should take as its only parameter a </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> giving a goal set. It should return a </span><strong><span>List</span><span>&lt;</span><span>KeyValuePair</span><span>&lt;</span><span>string, List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span><span>&gt;</span><span>&gt;</span></strong><span> giving the collection of key-value pairs to be used in Step 3 of the minimization algorithm (see </span><a href='#44-improved-lower-bounds'><span>Section 4.4. Improved Lower Bounds</span></a><span> and </span><a href='#45-data-structures'><span>Section 4.5. Data Structures</span></a><span>). After constructing a new </span><strong><span>List</span><span>&lt;</span><span>KeyValuePair</span><span>&lt;</span><span>string, List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span><span>&gt;</span><span>&gt;</span></strong><span>, iterate through all of the possible guesses. On each iteration:</span></p><ul><li><span>Using the appropriate methods above, obtain the partition that results from applying the current guess to the given goal set. The partition should be in the form of a </span><strong><span>List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span>.</span></li><li><span>If the first </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> has fewer elements than the given goal set, add to the </span><strong><span>List</span><span>&lt;</span><span>KeyValuePair</span><span>&lt;</span><span>string, List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span><span>&gt;</span><span>&gt;</span></strong><span> a key-value pair containing the current guess as the key and the partition obtained above as the value.</span></li></ul><p><span>After the above loop terminates, sort the resulting list using as the comparer the appropriate method above for comparing two </span><strong><span>KeyValuePair</span><span>&lt;</span><span>string, List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span><span>&gt;</span></strong><span>s.</span></p><h4 id='6110-a-public-optimalguess-method-and-a-public-numberofguesses-method'><span>6.1.10. A public OptimalGuess method and a public NumberOfGuesses method</span></h4><p><span>These methods will implement the mutually recursive minimization and maximization algorithms, respectively, described in </span><a href='#44-improved-lower-bounds'><span>Section 4.4. Improved Lower Bounds</span></a><span>. </span><strong><span>OptimalGuess</span></strong><span> should take the following parameters:</span></p><ul><li><span>A </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> giving a goal set.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving a lower-bound on any useful optimal score for the given goal set.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving an upper-bound on any useful optimal score for the given goal set.</span></li><li><span>An </span><strong><span>out int</span></strong><span> through which the optimal score will be returned.</span></li></ul><p><span>It should return a </span><strong><span>string</span></strong><span> giving the optimal guess.</span></p><p><strong><span>NumberOfGuesses</span></strong><span> should take the following parameters:</span></p><ul><li><span>A </span><strong><span>List</span><span>&lt;</span><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span><span>&gt;</span></strong><span> giving a partition of a goal set.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving a lower-bound on any useful optimal score for the given partition.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving an upper-bound on any useful optimal score for the given partition.</span></li></ul><p><span>It should return an </span><strong><span>int</span></strong><span> giving the optimal score.</span></p><p><span>If, for either of these methods, the given lower-bound is greater than or equal to the given upper-bound, throw an </span><strong><span>ArgumentException</span></strong><span>. Make use of the appropriate methods above in writing these methods.</span></p><h3 id='62-the-userinterface-class'><span>6.2. The UserInterface Class</span></h3><p><span>For this class, you will need seven </span><strong><span>private</span></strong><span> fields, three event handlers, and at least two additional </span><strong><span>private</span></strong><span> methods. You will also need to modify the provided constructor. The fields, event handlers, and constructor are described in what follows. You will need to decide how to break the code into at least two additional </span><strong><span>private</span></strong><span> methods. In making these decisions, look for places where you can avoid duplicating code by defining a </span><strong><span>private</span></strong><span> method, as well as for long methods that you can divide into smaller methods.</span></p><h4 id='621-private-fields'><span>6.2.1. private fields</span></h4><p><span>You will need the following </span><strong><span>private</span></strong><span> fields:</span></p><ul><li><span>A </span><strong><span>readonly NumericUpDown[</span>&nbsp;<span>]</span></strong><span> that will contain the four </span><strong><span>NumericUpDown</span></strong><span>s on the control. Initialize it to a new array, using the appropriate constant from the </span><strong><span>Strategy</span></strong><span> class for its size.</span></li><li><span>A </span><strong><span>readonly</span></strong><span> </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.random?view=net-6.0'><strong><span>Random</span></strong></a><span> giving a random number generator. Initialize it to a new instance using no parameters.</span></li><li><span>A </span><strong><span>string</span></strong><span> giving the code chosen by the codemaker. To avoid the need to make this field nullable, initialize it to an empty string.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving the number of guesses made so far in the current game.</span></li><li><span>An </span><strong><span>int</span></strong><span> giving the optimal number of remaining guesses in the current game.</span></li><li><span>A </span><strong><span>List</span><span>&lt;</span><span>string</span><span>&gt;</span></strong><span> giving the current goal set. Because it will be properly initialized by the &quot;New Game&quot; event handler, you can initialize it here to a new instance (so that it doesn&#39;t need to be nullable).</span></li><li><span>A </span><strong><span>string</span></strong><span> giving an optimal guess for the current goal set. To avoid the need to make this field nullable, initialize it to an empty string.</span></li></ul><h4 id='622-the-constructor'><span>6.2.2. The constructor</span></h4><p><span>Following the call to </span><strong><span>InitializeComponent</span></strong><span>, you will need to add code to do the following setup for the GUI:</span></p><ul><li><span>Add the </span><strong><span>NumericUpDown</span></strong><span>s. To each location in the </span><strong><span>NumericUpDown[</span>&nbsp;<span>]</span></strong><span> field, place a new </span><strong><span>NumericUpDown</span></strong><span>. Set this contol&#39;s properties so that its range will be from 0 to the number of colors minus 1 (use the appropriate constant in the </span><strong><span>Strategy</span></strong><span> class), so that it will automatically resize itself to fit its contents, and so that it is disabled. Finally, add it to the form using the </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.controlcollection.add?view=windowsdesktop-6.0#system-windows-forms-control-controlcollection-add(system-windows-forms-control)'><strong><span>Add</span></strong></a><span> method of the </span><strong><span>FlowLayoutPanel</span></strong><span>&#39;s </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.control.controls?view=windowsdesktop-6.0#system-windows-forms-control-controls'><strong><span>Controls</span></strong></a><span> property.</span></li><li><span>Set the the </span><strong><span>SplitContainer</span></strong><span> to split at the appropriate location. First, set its </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.splitcontainer.splitterdistance?view=windowsdesktop-6.0#system-windows-forms-splitcontainer-splitterdistance'><strong><span>SplitterDistance</span></strong></a><span> property to the height of the </span><strong><span>FlowLayoutPanel</span></strong><span>. Then, to prevent the user from changing it, set its </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.splitcontainer.issplitterfixed?view=windowsdesktop-6.0#system-windows-forms-splitcontainer-issplitterfixed'><strong><span>IsSplitterFixed</span></strong></a><span> property to </span><strong><span>true</span></strong><span>.</span></li><li><span>Set column widths in the </span><strong><span>ListView</span></strong><span> appropriately. For each </span><strong><span>ColumnHeader</span></strong><span> in the </span><strong><span>ListView</span></strong><span>&#39;s </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.listview.columns?view=windowsdesktop-6.0#system-windows-forms-listview-columns'><strong><span>Columns</span></strong></a><span> property, call its </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.windows.forms.columnheader.autoresize?view=windowsdesktop-6.0#system-windows-forms-columnheader-autoresize(system-windows-forms-columnheaderautoresizestyle)'><strong><span>AutoResize</span></strong></a><span> method, passing it </span><strong><span>ColumnHeaderAutoResizeStyle.HeaderSize</span></strong><span>.</span></li></ul><h4 id='623-an-event-handler-for-the-new-game-button'><span>6.2.3. An event handler for the &quot;New Game&quot; button</span></h4><p><span>First, remove all items from the </span><strong><span>ListView</span></strong><span>, then initialize the five non-</span><strong><span>readonly</span></strong><span> fields. To obtain a random goal code, index into the array containing all the possible codes (in the </span><strong><span>Strategy</span></strong><span> class) using an index obtained by calling the random number generator&#39;s </span><a href='https://learn.microsoft.com/en-us/dotnet/api/system.random.next?view=net-6.0#system-random-next(system-int32)'><strong><span>Next</span></strong></a><span> method, using the size of this array as its parameter. The other non-</span><strong><span>readonly</span></strong><span> fields can be initialized using constants from the </span><strong><span>Strategy</span></strong><span> class. Then enable the &quot;Make Optimal Guess&quot; and &quot;Guess:&quot; buttons and each of the </span><strong><span>NumericUpDown</span></strong><span>s.</span></p><h4 id='624-an-event-handler-for-the-make-optimal-guess-button'><span>6.2.4. An event handler for the &quot;Make Optimal Guess&quot; button</span></h4><p><span>First, increment the number of guesses made and obtain the score of the optimal guess (stored in a field) using the appropriate method in the </span><strong><span>Strategy</span></strong><span> class. Then add the next row to the </span><strong><span>ListView</span></strong><span> as you did for Homework 2. If the number of black hits is the same as the number of pegs, disable the </span><strong><span>NumericUpDown</span></strong><span>s and the &quot;Make Optimal Guess&quot; and &quot;Guess:&quot; buttons. Otherwise, update the goal set, its optimal score, and the optimal guess as follows:</span></p><ul><li><span>Use the guess just made to partition the current goal set into the dictionary representation. </span></li><li><span>Obtain the new goal set by looking up the score of this guess in this dictionary.</span></li><li><span>Determine the optimal score and optimal guess for this goal set using the appropriate method of the </span><strong><span>Strategy</span></strong><span> class. When calling this method, use 1 as the lower bound and the current optimal score plus 1 as the upper bound.</span></li></ul><h4 id='625-an-event-handler-for-the-guess-button'><span>6.2.5. An event handler for the &quot;Guess:&quot; button</span></h4><p><span>Using a </span><strong><span>StringBuilder</span></strong><span> build a </span><strong><span>string</span></strong><span> containing the contents of each of the </span><strong><span>NumericUpDown</span></strong><span>s. If any of the following conditions hold, update the fields and GUI as is done in the above event handler, but using the this </span><strong><span>string</span></strong><span> as the guess instead of the optimal guess:</span></p><ul><li><span>The current goal set has only one element, and the guess is this element. </span></li><li><span>The optimal score of this guess is less the optimal score of the current optimal guess. To determine the optimal score of the chosen guess, use the chosen guess to partition the goal set, and convert it to a list. Then using the appropriate method from the </span><strong><span>Strategy</span></strong><span> class, determine the optimal score of this partition. When calling this method, use 0 as the lower-bound and the current optimal score as the upper-bound.</span></li></ul></div></div>
+</body>
+</html>
