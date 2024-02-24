@@ -19,17 +19,19 @@ To begin a round, the codemaker selects a code, hidden from the codebreaker. Thi
 The codebreaker then tries to guess this code by making a series of guesses. After each guess, the codemaker scores the guess with the following two values:
 
 - The number of *black hits*: The number of pegs guessed correctly - the correct color in the correct location.
-- The number of *white hits*: The maximum number of additional pegs that would be guessed correctly if the incorrect pegs could be reordered.
+- The number of *white hits*: The maximum number of additional pegs that could be made correct by reordering the incorrect pegs.
 
 For example, suppose the code is `0123`. A guess of `0011` would be scored as 1 black hit (the first peg is the correct color) and 1 white hit (the last three pegs in the guess could be reordered as `101`, yielding 1 additional match).
 
-If a guess is scored as 4 black hits, the round ends, and the codemaker received a number of points equal to the number of guesses made by the codebreaker. Additional rules govern cases in which the codemaker incorrectly scores a guess, or if the codebreaker fails to guess the code within a specified maximum number of guesses; however, these rules are unimportant for this program.
+If a guess is scored as 4 black hits, the round ends, and the codemaker receives a number of points equal to the number of guesses made by the codebreaker. Additional rules govern cases in which the codemaker incorrectly scores a guess, or if the codebreaker fails to guess the code within a specified maximum number of guesses; however, these rules are unimportant for this program.
+
+For an illustration of the game, [here](https://www.archimedes-lab.org/mastermind.html) is a website at which you can play single rounds as the codebreaker.
 
 ### 1.2. Optimal Guesses
 
-There are 1296 possible codes. Let's refer to this set of codes as the *initial goal set*. In general, any subset of these codes can be a goal set. We can think of the initial guess as partitioning the initial goal set into nonempty subsets, each corresponding to a different score; i.e., all of the codes that result in a score of no hits are placed in one set, all those resulting in 1 black hit and no white hits are placed in another, etc. Note that because there are 14 possible scores (the score 3 black hits and 1 white hit is impossible), a guess will partition a goal set into up to 14 nonempty goal sets. The score that is actually given for the guess then selects one of these goal sets as the set of possible solutions. Subsequent guesses further partition the set of possible solutions.
+There are 6<sup>4</sup> = 1296 possible codes. Let's refer to this set of codes as the *initial goal set*. In general, any subset of these codes can be a goal set. We can think of the initial guess as partitioning the initial goal set into nonempty subsets, each corresponding to a different score; i.e., all of the codes that result in a score of no hits are placed in one set, all those resulting in 1 black hit and no white hits are placed in another, etc. Note that because there are 14 possible scores (the score 3 black hits and 1 white hit is impossible), a guess will partition a goal set into up to 14 nonempty goal sets. The score that is actually given for the guess then selects one of these goal sets as the set of possible solutions. Subsequent guesses further partition the set of possible solutions.
 
-Let *S* be some nonempty goal set. We say that *S* is 1-solvable if it contains exactly 1 element (we can guess this code immediately). For *n* \> 1, we say that *S* is *n*-solvable if there is a guess that partitions *S* into goal sets such that each is either empty or *k*-solvable for some *k* \< *n*. We define the *optimal score* of *S* to be the minimum *n* such that *S* is *n*-solvable. We then say that a guess is *optimal* for *S* if:
+Let *S* be some nonempty goal set. We say that *S* is *1-solvable* if it contains exactly 1 element (we can guess this code immediately). For *n* \> 1, we say that *S* is *n-solvable* if there is a guess that partitions *S* into nonempty goal sets such that each is *k*-solvable for some *k* \< *n*. We define the *optimal score* of *S* to be the minimum *n* such that *S* is *n*-solvable. We then say that a guess is *optimal* for *S* if:
 
 - it is the only element in *S*; or
 - it partitions *S* such that each nonempty goal set has a smaller optimal score than does *S*.
@@ -43,7 +45,7 @@ Let *S* be some nonempty goal set. We say that *S* is 1-solvable if it contains 
 
 Each of these goal sets is 1-solvable because it contains only 1 element. *S* is therefore 2-solvable. Furthermore, it can't be 1-solvable because it contains more than 1 element. Its optimal score is therefore 2, and `1210` is an optimal guess. We also note that none of the elements of *S* is an optimal guess, as each one partitions *S* into goals sets such that the set with 2 black hits and 2 white hits has 2 elements.
 
-Our definition of an optimal guess focuses on the worst case. For example, the code that you will write can be used to show that the initial goal set has an optimal score of 5. This means that there is a strategy to break any code in at most 5 guesses. This definition is not the only way of defining optimal guesses. For example, we might consider finding a strategy that minimizes the *expected* number of guesses, assuming codes are chosen randomly with uniform distribution. However, this assumption might not be valid when the codemaker is human. Defining optimality based on the worst case avoids the need to make any assumptions about how the code is chosen.
+Our definition of an optimal guess focuses on the worst case. For example, the program that you will write can be used to show that the initial goal set has an optimal score of 5. This means that there is a strategy to break any code within at most 5 guesses. This definition is not the only way of defining optimal guesses. For example, we might consider finding a strategy that minimizes the *expected* number of guesses, assuming codes are chosen randomly with uniform distribution by the codemaker. However, this assumption might not be valid when the codemaker is human. Defining optimality based on the worst case avoids the need to make any assumptions about how the code is chosen.
 
 ### 1.3. Specific Requirements
 
@@ -55,7 +57,7 @@ Create a GitHub repository using the link provided in the Canvas assignment and 
 
 ## 3. User Interface
 
-In this section, we will describe the look and behavior of the GUI that you are to design. We will first outline what you will need to build using the Design window. Then we will describe the required behavior of the GUI. You will need to provide code to implement this behavior (see [Section 6. Coding Requirements](#6-coding-requirements)). The [demo video]() also illustrates the expected look and behavior.
+In this section, we will describe the look and behavior of the GUI that you are to design. We will first outline what you will need to build using the Design window. Then we will describe the required behavior of the GUI. You will need to provide code to implement this behavior (see [Section 6. Coding Requirements](#6-coding-requirements)). The [demo video](https://youtu.be/NddWESFmmrw) also illustrates the expected look and behavior.
 
 ### 3.1. Manual User Interface Design
 
@@ -65,11 +67,11 @@ Using the Design window, design a GUI resembling the following:
 
 The above only shows a part of the GUI. Modifications will be made by code (see [Section 6. Coding Requirements](#6. Coding Requirements)). 
 
-At the top is a **ToolStrip** containing two **Button**s. The "New Game" button is initially enabled, but the "Make Optimal Guess" button is initially disabled. Filling the remainder of the window is a **SplitContainer**. Adding it to the form will cause it to fill the remainder of the window. To cause it to split horizontally, set its **Orientation** property to **Horizontal**. You can then drag the bar that splits the container as you wish, but its final location will be set by code (see [Section 6. Coding Requirements](#6. Coding Requirements)).
+At the top is a **ToolStrip** containing two **Button**s. You will need to change each button's **DisplayStyle** property to **Text** so that it shows text, rather than an image. The "New Game" button is initially enabled, but the "Make Optimal Guess" button is initially disabled. Filling the remainder of the window is a **SplitContainer**. Adding it to the form will cause it to fill the remainder of the window. To cause it to split horizontally, set its **Orientation** property to **Horizontal**. You can then drag the bar that splits the container as you wish, but its final location will be set by code (see [Section 6. Coding Requirements](#6. Coding Requirements)).
 
 In the upper-left corner of the upper panel of the **SplitContainer**, add a **FlowLayoutPanel**. To this **FlowLayoutPanel**, add the "Guess:" button. Then set the **FlowLayoutPanel**'s **AutoSize** property to **True** and its **AutoSizeMode** property to **GrowAndShrink**.
 
-In lower panel of the **SplitContainer**, add a **ListView**, and set its **Dock** property so that it fills the panel. Set its **View** and **GridLines** properties to display the contents as a grid whose rows and columns are separated by lines. Then edit the Columns property, either through its entry in the Properties list or by clicking "Edit Columns..." below the Properties list. In the resulting dialog, use the "Add" button to add a column. Change the **(Name)** property of each column header so that it follows the [naming convention for GUI controls](https://cis300.cs.ksu.edu/appendix/style/naming/index.html), and change each **Text** property to the text to display in the column header. You can also adjust the **Width** properties to make each header's text fully visible, but the final column widths will be set by code (see [Section 6. Coding Requirements](#6. Coding Requirements)).
+In lower panel of the **SplitContainer**, add a **ListView**, and set its **Dock** property so that it fills the panel. Set its **View** and **GridLines** properties to display the contents as a grid whose rows and columns are separated by lines. Set its **HeaderStyle** property to **Nonclickable**. Then edit the **Columns** property, either through its entry in the Properties list or by clicking "Edit Columns..." below the Properties list. In the resulting dialog, use the "Add" button to add a column. Change the **(Name)** property of each column header so that it follows the [naming convention for GUI controls](https://cis300.cs.ksu.edu/appendix/style/naming/index.html), and change each **Text** property to the text to display in the column header. You can also adjust the **Width** properties to make each header's text fully visible, but the final column widths will be set by code (see [Section 6. Coding Requirements](#6. Coding Requirements)).
 
 Finally, resize the form to an appropriate size.
 
@@ -79,16 +81,16 @@ Once the program is finished, it should initially open a window resembling the f
 
 ![The initial GUI.](initial-gui.png)
 
-At this point, the only enabled control is the "New Game" button. Clicking this button at any time should enable the other two buttons and all four **NumericUpDown**s and generate a code randomly, keeping this code hidden from the user.
+At this point, the only enabled control is the "New Game" button. Clicking this button at any time should enable the other two buttons and all four **NumericUpDown**s and generate a code randomly, keeping this code hidden from the user. The allowable values within the **NumericUpDown**s should be integers from 0 to 5.
 
 The user may then repeatedly do one of the following actions:
 
 - Make a guess by entering the four colors into the **NumericUpDown**s and clicking the "Guess:" button. If the guess is not an optimal guess (see [Section 1.2. Optimal Guesses](#1.2. Optimal Guesses)), a **MessageBox** resembling the following should be displayed:
   ![A MessageBox indicating a guess is suboptimal.](suboptimal-message.png)
   If the user closes the **MessageBox** with the "No" button, nothing on the GUI should change. If the user closes it with the "Yes" button, or if this **MessageBox** wasn't shown because the guess was optimal, the following changes should be made to the GUI:
-  - A value 1 greater than the last value in the "Play" column (or 1 if the "Play" column is empty) should be added to that column.
-  - The user's guess should be added to the "Guess" column.
-  - The score of this guess should be added to the last two columns. If the number of black hits is 4, the "Make Optimal Guess" and "Guess:" buttons, as well as all four **NumericUpDown**s, should be disabled.
+  - A value 1 greater than the last value in the "Play" column (or 1 if the "Play" column is empty) should be placed in the next available row of that column.
+  - The user's guess should be placed in the "Guess" column of this row.
+  - The score of this guess should be placed in the last two columns of this row. If the number of black hits is 4, the "Make Optimal Guess" and "Guess:" buttons, as well as all four **NumericUpDown**s, should be disabled.
 - Click the "Make Optimal Guess" button. The program will then choose an optimal guess and update the GUI as above, using the chosen guess in place of a guess by the user.
 
 ## 4. Algorithms
@@ -97,11 +99,11 @@ In this section, we'll give the algorithms for finding optimal guesses and for d
 
 ### 4.1. Game Trees
 
-Consider the following variation of the game. Instead of selecting a code initially, the codemaker delays selecting the code as long as possible. For each guess, the codemaker's responsibility is to assign a score such that at least one code satisfies all of the scores up to that point. Thus, while the codebreaker is trying to minimize the number of guesses, the codemaker is actively trying to maximize the number of guesses. To find an optimal guess, we need to determine which guess the codebreaker will make, on the assumption that both players are playing optimally.
+Consider the following variation of the game. Instead of selecting a code initially, the codemaker delays selecting the code as long as possible. For each guess, the codemaker's responsibility is to assign a score such that at least one code satisfies all of the scores up to that point. Thus, while the codebreaker is trying to minimize the number of guesses, the codemaker is actively trying to maximize the number of guesses. To find an optimal guess, we need to determine which guess the codebreaker will make, on the assumption that both players are playing optimally. Note that we will only use this variation to find optimal guesses and to determine whether a given guess is optimal. The program will play the game as originally defined, with the codemaker selecting a code before the codebreaker begins guessing.
 
-Defining the game in this way makes it similar to other two-player perfect-knowledge games. Specifically, the players alternate making plays, with one player (the codebreaker) trying to minimize the score, and the other player (the codemaker) trying to maximize the score. The main difference from most two-player perfect-knowledge games is that the two players make their plays under different rules.
+This new variation of the game is similar to other two-player perfect-knowledge games. Specifically, the players alternate making plays, with one player (the codebreaker) trying to minimize the score, and the other player (the codemaker) trying to maximize the score. The main difference from most two-player perfect-knowledge games is that the two players make their plays under different rules. 
 
-Having defined this game variation, we can now define a game tree for any position in this game. When it is the codebreaker's turn to play, the game position will be the goal set consisting of all codes consistent with the scores given to all the guesses made up to this point. We will call a node representing such a game position a *minimizing* node, as the codebreaker is trying to minimize the number of guesses. When it is the codemaker's turn, the game position will be the partition of the goal set implied by the codebreaker's last guess (see [Section 1.2. Optimal Guesses](#1.2. Optimal Guesses)). We will call a node representing such a game position a *maximizing* node, as the codemaker is trying to maximize the number of guesses. A minimizing node at which the game isn't over will have 1296 children - the partitions resulting from all possible guesses. A maximizing node will have from 1 to 14 children - the goal sets selected by all legal scorings of the guess. The leaves are the minimizing nodes for which the last score was 4 black hits.
+Having defined this game variation, we can now define a game tree for any position in this game. When it is the codebreaker's turn to play, the game position will be the goal set consisting of all codes consistent with the scores given to all the guesses made up to this point. We will call a node representing such a game position a *minimizing* node, as the codebreaker at this point is trying to minimize the number of guesses. When it is the codemaker's turn, the game position will be the partition of the goal set implied by the codebreaker's last guess (see [Section 1.2. Optimal Guesses](#1.2. Optimal Guesses)). We will call a node representing such a game position a *maximizing* node, as the codemaker is trying to maximize the number of guesses. A minimizing node at which the game isn't over will have 1296 children - the partitions resulting from all possible guesses. A maximizing node will have from 1 to 14 children - the goal sets selected by all legal scorings of the guess. The leaves are the minimizing nodes for which the last score was 4 black hits.
 
 **Example:** Suppose it is the codebreaker's turn to play, and that the current goal set is {`1122`, `1212`, `2121`, `2211`}. Here is a portion of the game tree from this position:
 
@@ -109,18 +111,18 @@ Having defined this game variation, we can now define a game tree for any positi
 
 Minimizing nodes are shown with sharp corners, and maximizing nodes are shown with rounded corners. Leaves are shown with heavy borders. For the minimizing nodes, most of the children are not shown, as there are 1296 of them. The children shown are most relevant for the discussion that follows. On the other hand, all of the children of maximizing nodes are shown.
 
-One difficulty in dealing with game trees is that they are infinite. Consider, for example, the node reached by guessing `0000` at the root and scoring no hits. This node is identical to the root; hence, its children will be the same as the root's children. Consequently, an infinite path consisting of repeatedly guessing `0000` and scoring no hits occurs in this tree. This path corresponds to the codebreaker repeatedly guessing `0000` forever. 
+One difficulty in dealing with game trees as defined above is that they are infinite. Consider, for example, the node reached by guessing `0000` at the root and scoring no hits. This node is identical to the root; hence, its children will be the same as the root's children. Consequently, an infinite path consisting of repeatedly guessing `0000` and scoring no hits occurs in this tree. This path corresponds to the codebreaker repeatedly guessing `0000` forever. 
 
-Though infinite paths are present in the tree, they have no utility in computing an optimal guess. We can eliminate them by ignoring the following children of any minimizing node:
+Though infinite paths are present in the tree, they have no utility in computing an optimal guess. We can eliminate them by ignoring the following children of any minimizing node *u*:
 
-- If the minimizing node has a goal set with size larger than 1, ignore any child that does not contain at least one smaller goal set than its parent's goal set (note that if at least one goal set is smaller, all goal sets in the partition will be smaller). 
-- If the minimizing node has a goal set of size 1, ignore any child other than the one reached by guessing the only member of the goal set.
+- If *u* has a goal set with size larger than 1, ignore any child that does not contain at least one (nonempty) goal set that is smaller than *u*'s goal set (note that if at least one goal set is smaller, all goal sets in the partition will be smaller). 
+- If *u* has a goal set of size 1, ignore any child other than the one reached by guessing the only member of the goal set.
 
 These children represent wasted guesses - guesses that can provide no new information. When we eliminate these nodes, the sizes of goal sets always decrease as we go from minimizing nodes to maximizing nodes until a goal set of size 1 is reached. Furthermore, they stay the same size when going from maximizing nodes to minimizing nodes. After a goal set of size 1 is reached, the only element of the goal set is guessed, and the game comes to an end. Because minimizing and maximizing nodes alternate, all paths must be finite.
 
 Having simplified the game tree to a finite tree, we can now see how it can be used to determine an optimal guess. At any leaf, the code has been broken; hence, no more guesses are needed. We therefore say the *value* of a leaf is 0. Because the codemaker is trying to maximize the number of guesses, the value of a maximizing node is the maximum of the values of its children. Because the codebreaker is trying to minimize the number of guesses, the value of a minimizing node other than a leaf is the minimum of the values of its children, plus 1 to account for the guess made to reach the child. Using these definitions, the value of a minimizing node will always give the optimal score of the position it represents.
 
-We can now evaluate the root of the above tree to give us the optimal guess. We will work from the bottom, although the algorithm we present below works from the root using recursion. The parents of most of the leaves shown in this tree have only a single child; hence, these maximizing nodes have values of 0. The parents of these maximizing nodes all have only a single child, hence, these minimizing nodes all have values of 1. Consider the two maximizing nodes (shown near the center of the tree) containing two goal sets, {`1212`} and {`2121`}. Each of these nodes has one child with a value of 0 and another child with a value of 1. Maximizing, we see that each of these nodes has a value of 1. Their parent, a minimizing node, has a value 1 more than the minimum of these two values; i.e., it has a value of 2. (Actually, this node has other children that are not shown, but each of them also has a value of 1.)
+We can now evaluate the root of the above tree to give us an optimal guess. We will work from the bottom, although the algorithm we present below works from the root using recursion. The parents of most of the leaves shown in this tree have only a single child; hence, these maximizing nodes have values of 0. The parents of these maximizing nodes all have only a single child; hence, these minimizing nodes all have values of 1. Consider the two maximizing nodes (shown near the center of the tree) containing two goal sets, {`1212`} and {`2121`}. Each of these nodes has one child with a value of 0 and another child with a value of 1. Maximizing, we see that each of these nodes has a value of 1. Their parent, a minimizing node, has a value 1 more than the minimum of these two values; i.e., it has a value of 2. (Actually, this node has other children that are not shown, but each of them also has a value of 1.)
 
 We have now evaluated every node shown in this tree except the root and its two children (ignoring the rightmost child shown). The children of the maximizing node reached by the guess `1210` all have values of 1; hence, this node has a value of 1. The children of the other maximizing node have values of 0, 2, and 1, respectively; hence, this node has a value of 2. The minimum of these two values is 1 (and none of the root's other children has a value less than 1); hence, the value of the root is 2. An optimal play is therefore `1210` - one leading to a child with minimum value.
 
@@ -138,16 +140,16 @@ These two algorithms are based on the *minimax* strategy for processing game tre
 
 The minimization algorithm will take as its input a goal set. It will return two values: the optimal score for the given goal set and an optimal guess. Note that the optimal score is the same as the value of the minimizing node representing the given goal set in a game tree.
 
-The maximization algorithm will take as its input a collection of disjoint goal sets. It will return the maximum of the optimal scores of the given goal sets. Note that this value is the same as the value of the maximizing node representing this collection in a game tree. Note also that if we already know the optimal score of some goal set containing more than one element, we can use this algorithm to determine if a given guess is optimal for that goal set: We first partition the goal set according to the given guess, then, ignoring any goal set in this partition that corresponds to 4 black hits, we pass the resulting partition to the maximization algorithm. If this algorithm returns a value less than the optimal score, the given guess is optimal; otherwise, it isn't.
+The maximization algorithm will take as its input a collection of disjoint, nonempty goal sets. It will return the maximum of the optimal scores of the given goal sets. Note that this value is the same as the value of the maximizing node representing this collection in a game tree. Note also that if we already know the optimal score of some goal set containing more than one element, we can use this algorithm to determine if a given guess is optimal for that goal set: We first partition the goal set according to the given guess, then, ignoring any goal set in this partition that corresponds to 4 black hits, we pass the resulting partition to the maximization algorithm. If this algorithm returns a value less than the optimal score, the given guess is optimal; otherwise, it isn't.
 
-Before presenting the algorithms, we first note that they will not use any data structure representing the game tree. Instead, the structure of the mutual calls will correspond to the game tree; i.e., wherever a minimizing node *x* has a maximizing node *y* as one of its children, the minimization algorithm, when called with the goal set represented by *x*, will call the maximizing algorithm, passing the collection of goal sets represented by *y*.
+Before presenting the algorithms, we first note that they will not use any data structure representing the game tree. Instead, the structure of the mutual calls will correspond to the game tree; i.e., wherever a minimizing node *x* has a maximizing node *y* as one of its children, the minimization algorithm, when called with the goal set represented by *x*, will call the maximization algorithm, passing the collection of goal sets represented by *y*. Likewise, wherever a maximizing node *y* has a minimizing node *z* as one of its children, the maximization algorithm, when called with the partition represented by *y*, will call the minimization algorithm, passing the goal set represented by *z*.
 
 The basic minimization algorithm is as follows:
 
 1. If the given goal set has only 1 element, return that element as the guess and 1 as the optimal score.
 2. Build a collection of key-value pairs containing as its keys all possible guesses that partition the given goal set into smaller goal sets. The value associated with each key should be the resulting partition.
 3. Call the maximization algorithm on each key-value pair in this collection. As this loop iterates, keep track of the minimum returned value plus 1 and the key associated with the partition giving this minimum value. 
-4. Return the minimum obtained in Step 3 as the optimal score and the key as the optimal guess.
+4. Return the minimum obtained in Step 3 as the optimal score and its associated key as the optimal guess.
 
 The basic maximization algorithm iterates through the goal sets in the given partition calling the minimization algorithm on each, and maintaining the maximum optimal score returned by that algorithm. It returns this maximum optimal score.
 
@@ -159,19 +161,19 @@ As we mentioned in [Section 1.2. Optimal Guesses](#1.2. Optimal Guesses), the op
 
 We can generalize this idea by adding an extra parameter to both algorithms. This parameter gives an upper bound on the useful values that could be returned by the algorithm. Thus, if the maximization algorithm ever attains a value greater than or equal to this maximum, it can stop its evaluation, as whatever value it returns won't be used by its parent.
 
-For example, consider again the game tree shown at the end of [Section 4.1. Game Trees](#4.1. Game Trees). After the root has evaluated the guess `1210`, we know that the optimal score is no more than 2. Because we will add 1 to whatever is returned by the maximization algorithm, we can therefore pass 1 as an upper-bound when evaluating the guess `1122`. When the maximization algorithm then evaluates 2 black hits and 2 white hits, the value obtained is 2. There is now no point in evaluating 4 white hits, as whatever is returned will be at least 2, and the minimization algorithm won't use it.
+For example, consider again the game tree shown at the end of [Section 4.1. Game Trees](#4.1. Game Trees). After the root has evaluated the guess `1210`, we know that the optimal score is no more than 2. Because we will add 1 to whatever is returned by the maximization algorithm, we can therefore pass 1 as an upper-bound when evaluating the guess `1122`. When the maximization algorithm then evaluates 2 black hits and 2 white hits, the value obtained is 2. There is now no point in evaluating 4 white hits, as whatever the maximization algorithm returns will be at least 2, and the minimization algorithm won't use it.
 
 In a similar way, we can also include a lower bound parameter for each algorithm. Whenever the minimizing algorithm attains a minimum value less than or equal to this lower bound, it can stop its evaluation, as the result it computes won't be used.
 
-These optimizations are called *alpha-beta pruning* because the lower- and upper-bounds have traditionally been called &alpha; and &beta;, respectively. We can make this pruning more effective by first evaluation children that are more likely to be optimal. Thus, for the maximization algorithm, it makes sense to consider the goal sets from largest to smallest, as a larger goal set is more likely to have a larger optimal score. For the minimization algorithm, it makes sense to consider first the guesses that yield the partitions having the smallest maximum-sized goal sets, as these are more likely to have a smaller optimal score.
+These optimizations are called *alpha-beta pruning* because the lower- and upper-bounds have traditionally been called &alpha; and &beta;, respectively. We can make this pruning more effective by first evaluating children that are more likely to be optimal. Thus, for the maximization algorithm, it makes sense to consider the goal sets from largest to smallest, as a larger goal set is more likely to have a larger optimal score. For the minimization algorithm, it makes sense to consider first the guesses that yield the partitions having the smallest maximum-sized goal sets, as these are more likely to have a smaller optimal score.
 
 ### 4.4. Improved Lower Bounds
 
 In some cases, we can improve the lower bounds we use in alpha-beta pruning by showing that any goal set whose size exceeds a certain threshold must have an optimal score of at least some minimum value. An easy example is that any goal set of size greater than 1 must clearly have an optimal score of at least 2. 
 
-Now suppose that some goal size has a size greater than 14. Any guess will partition this goal set into at most 14 goal sets. By [the pigeonhole principle](https://www2.edc.org/makingmath/mathtools/pigeonhole/pigeonhole.asp), at least one of these goal sets has a size greater than 1, and hence has an optimal score of at least 2. The original goal set must therefore have an optimal size of at least 3.
+Now suppose that some goal size has a size greater than 14. Any guess will partition this goal set into at most 14 goal sets. By [the pigeonhole principle](https://www2.edc.org/makingmath/mathtools/pigeonhole/pigeonhole.asp), at least one of these goal sets has a size greater than 1, and hence has an optimal score of at least 2. The original goal set must therefore have an optimal score of at least 3.
 
-Finally, suppose that some goal set has a size greater than 175. Again, any guess will partition this goal set into at most 14 goal sets. Furthermore, the goal set resulting from 4 black hits can contain at most 1 element. Consider the goal set resulting from 2 black hits and 2 white hits. There are 6 ways that the 2 black hits can be selected. Once these are selected, the only code with 2 white hits is the one in which the colors of the 2remaining pegs are swapped. Consequently, this goal set can contain at most 6 elements. The other 12 goal sets must then contain a total of more than 168 elements. Because 12 &times; 14 = 168, again by the pigeonhole principle, at least one of these goal sets must contain more than 14 elements. As we showed above, this goal set must have an optimal size of at least 3; hence, the original goal set must have an optimal size of at least 4.
+Finally, suppose that some goal set has a size greater than 175. Again, any guess will partition this goal set into at most 14 goal sets. Furthermore, the goal set resulting from 4 black hits can contain at most 1 element. Consider the goal set resulting from 2 black hits and 2 white hits. There are 6 ways that the 2 black hits can be selected. Once these are selected, the only code with 2 white hits is the one in which the colors of the 2 remaining pegs are swapped. Consequently, this goal set can contain at most 6 elements. The other 12 goal sets must then contain a total of more than 168 elements. Because 12 &times; 14 = 168, again by the pigeonhole principle, at least one of these goal sets must contain more than 14 elements. As we showed above, this goal set must have an optimal size of at least 3; hence, the original goal set must have an optimal size of at least 4.
 
 We can utilize these improved lower bounds within the maximization algorithm by initializing the maximum  being found to the maximum of the given lower bound and the appropriate improved lower bound identified above.
 
@@ -179,7 +181,7 @@ Let's now formalize the optimized algorithms. We'll start by revising their spec
 
 The minimization algorithm will take as its input a goal set, a lower bound on any useful optimal score, and an upper bound on any useful optimal score. The lower bound must be less than the upper bound. It will again return two values. One of these values will be the optimal score, provided the optimal score is greater than the lower bound and less than the upper bound. In this case, the second value returned is an optimal guess. If the optimal score is less than or equal to the lower bound, instead of returning an optimal score, it will return some value less than or equal to the lower bound. Likewise, if the optimal score is greater than or equal to the upper bound, it will return some value greater than or equal to the upper bound. In either of these last two cases, the guess returned may not be optimal. 
 
-The maximization algorithm will take as its input a collection of disjoint goal sets ordered from largest to smallest, a lower bound on any useful optimal score, and an upper bound on any useful optimal score. The lower bound must be less than the upper bound. It will return the maximum of the optimal scores of the given goal sets, provided this maximum is greater than the lower bound and less than the upper bound. If this maximum is less than or equal to the lower bound, some value less than or equal to the lower bound will be returned. If this maximum is greater than or equal to the upper bound, some value greater than or equal to the upper bound will be returned.
+The maximization algorithm will take as its input a collection of disjoint, nonempty goal sets ordered from largest to smallest, a lower bound on any useful optimal score, and an upper bound on any useful optimal score. The lower bound must be less than the upper bound. It will return the maximum of the optimal scores of the given goal sets, provided this maximum is greater than the lower bound and less than the upper bound. If this maximum is less than or equal to the lower bound, some value less than or equal to the lower bound will be returned. If this maximum is greater than or equal to the upper bound, some value greater than or equal to the upper bound will be returned.
 
 For the minimization algorithm, we will accumulate the minimum of the values returned by the maximization algorithm, then add 1 to this minimum at the end. It therefore will make sense to decrease the given lower- and upper-bounds by 1. Because any value returned by the maximization algorithm will be an upper-bound on any useful subsequent values returned by this algorithm, we can use the upper-bound to accumulate the minimum. The minimization algorithm then operates as follows:
 
@@ -192,7 +194,7 @@ For the minimization algorithm, we will accumulate the minimum of the values ret
 For the maximization algorithm, we accumulate the maximum of the values returned by the minimization algorithm as the lower-bound because any value returned by the minimization algorithm will be a lower-bound on any useful subsequent values returned by this algorithm. The maximization then algorithm operates as follows:
 
 1. Update the lower-bound to the maximum of its given value and the appropriate improved lower bound for the first goal set in the given partition as described earlier in this section.
-2. Iterate through the goal sets in the given partition calling the minimization algorithm on each, and maintaining the maximum optimal score returned by that algorithm as the lower-bound. Prior to each call, if the lower-bound is greater than or equal to the given upper-bound, return this lower-bound. 
+2. Iterate through the goal sets in the given partition, calling the minimization algorithm on each, and maintaining the maximum optimal score returned by that algorithm as the lower-bound. Prior to each call, if the lower-bound is greater than or equal to the given upper-bound, return this lower-bound. 
 3. Return the lower-bound.
 
 ### 4.5. Data Structures
@@ -205,7 +207,7 @@ When using a guess to form a partition, we need to be able to access the goal se
 
 We also need to be able to sort a partition. After the partition is built, we have no need for the score of each partition. It therefore makes sense to copy the values from the dictionary representing the partition to a **List\<List\<string\>\>** at this point. Each element of this list is a goal set in the partition.
 
-Finally, Step 2 of the minimization algorithm needs to build a collection of key-value pairs, where each key is a guess, and its associated value is the partition resulting from this guess. We could use a dictionary, but after the collection is built, we'll need to sort it. Therefore, it makes more sense to use a **List\<KeyValuePair\<string, List\<List\<string\>\>\>\>**.
+Finally, Step 3 of the minimization algorithm needs to build a collection of key-value pairs, where each key is a guess, and its associated value is the partition resulting from this guess. We could use a dictionary, but after the collection is built, we'll need to sort it. Therefore, it makes more sense to use a **List\<KeyValuePair\<string, List\<List\<string\>\>\>\>**.
 
 ## 5. Software Architecture
 
@@ -213,7 +215,7 @@ Your program should contain two classes, as shown in the following class diagram
 
 <img src="ClassDiagram.png" alt="The software architecture." style="zoom:67%;" />
 
-**UserInterface** implements the GUI. Not all of the **private** methods required for this class are shown in the class diagram - see [Section 6.1. The UserInterface Class](#6.1. The UserInterface Class) for more information. **Strategy** is a **static** class containing methods and constants for finding and checking optimal plays, as well as for scoring plays and partitioning goal sets. You will need to implement both of these classes, as outlined in the coding requirements that follow. In order for the provided unit tests to compile, all **public** members of the **Strategy** class must match those shown in the class diagram; otherwise, you may use different names as long as they obey the [naming conventions](https://cis300.cs.ksu.edu/appendix/style/naming/index.html) for this class.
+**UserInterface** implements the GUI. Not all of the **private** methods required for this class are shown in the class diagram - see [Section 6.2. The UserInterface Class](#6.2. The UserInterface Class) for more information. **Strategy** is a **static** class containing methods and constants for finding and checking optimal plays, as well as for scoring plays and partitioning goal sets. You will need to implement both of these classes, as outlined in the coding requirements that follow. In order for the provided unit tests to compile, the names of all **public** members of the **Strategy** class must match those shown in the class diagram; otherwise, you may use different names as long as they obey the [naming conventions](https://cis300.cs.ksu.edu/appendix/style/naming/index.html) for this class.
 
 ## 6. Coding Requirements
 
@@ -232,7 +234,7 @@ Six of the fields needed for this class are described here. Because the seventh 
 - **public static readonly int** `OptimalScore`: The optimal score for a new game (5).
 - **public static readonly string** `InitialOptimalGuess`: An optimal guess for the initial goal set. While any guess that has at least two distinct colors will work, we use `"0011"` because it minimizes the size of the largest goal set in the resulting partition.
 - A **private const char** giving the smallest color (`'0'`).
-- A **private static readonly int[&nbsp;]** initialized to `{ 0, 0, 1, 14, 175 }`. Thus, if a goal set has size greater than value at location *i*, the optimal score of that goal set is at least *i* (see [Section 4.4. Improved Lower Bounds](#4.4. Improved Lower Bounds)). Location 0 will be unused.
+- A **private static readonly int[&nbsp;]** initialized to `{ 0, 0, 1, 14, 175 }`. Thus, if a goal set has size greater than the value at location *i*, the optimal score of that goal set is at least *i* (see [Section 4.4. Improved Lower Bounds](#4.4. Improved Lower Bounds)). Location 0 will be unused.
 
 #### 6.1.2. All possible codes
 
@@ -252,9 +254,9 @@ Apart from this method, define a **public static readonly List\<string\>** `AllC
 
 This method should take as its parameters two **string**s representing codes. One of these codes will be a guess, and the other will be a goal code, but as far as the coding is concerned, it doesn't matter which is which. It should return an **(int, int)** indicating the score of the guess, where the first **int** is the number of black hits, and the second is the number of white hits.
 
-While computing the number of black hits is straightforward, computing the number of white hits is trickier. It turns out to be easier to compute number of total hits (i.e., the sum of the number of black hits and the number of white hits) than to compute the number of white hits directly. The number of white hits can then be computed by subtracting the number of black hits from the number of total hits.
+While computing the number of black hits is straightforward, computing the number of white hits is trickier. It turns out to be easier to compute the number of total hits (i.e., the sum of the number of black hits and the number of white hits) than to compute the number of white hits directly. The number of white hits can then be computed by subtracting the number of black hits from the number of total hits.
 
-The number of total hits for a given color is the minimum of the number of occurrences of that color in the two given codes. The number of total hits is then the sum the number of total hits for each color. For example, suppose the given codes are `"0211"` and `"1221"`. The following table shows the number of occurrences of each color in each code, and the minimum number of occurrences for each color:
+The number of total hits for a given color is the minimum of the number of occurrences of that color in the two given codes. The number of total hits is then the sum the number of total hits for each color. For example, suppose the given codes are `"0211"` and `"1221"`. The following table shows the number of occurrences of each color in each code, and the minimum number of occurrences of each color:
 
 | Color | 0211 | 1221 | Minimum |
 | ----- | ---- | ---- | ------- |
@@ -284,7 +286,7 @@ This method should take two parameters of type **KeyValuePair\<string, List\<Lis
 
 #### 6.1.7. A public static Partition method
 
-This method should take as its parameters a **LIst\<string\>** giving a goal set and a **string** giving a guess. It should return a **Dictionary\<(int, int), List\<string\>\>** giving the partition produced by applying the given guess to the given goal set (see [Section 4.5. Data Structures](#4.5. Data Structures)). Begin by constructing a new dictionary. Then for each code in the given goal set, if the code is different from the given guess:
+This method should take as its parameters a **List\<string\>** giving a nonempty goal set and a **string** giving a guess. It should return a **Dictionary\<(int, int), List\<string\>\>** giving the partition produced by applying the given guess to the given goal set (see [Section 4.5. Data Structures](#4.5. Data Structures)). Begin by constructing a new dictionary. Then for each code in the given goal set, if the code is different from the given guess:
 
 - Compute the score of the guess relative to the code.
 - Retrieve the value associated with this score in the dictionary. If the dictionary doesn't already contain this score as a key, add this key with an empty list as its value.
@@ -292,11 +294,11 @@ This method should take as its parameters a **LIst\<string\>** giving a goal set
 
 #### 6.1.8. A public static ToList method
 
-This method should take as its only parameter a **Dictionary\<(int, int), List\<string\>\>** as returned by the above method. It should return a **List\<List\<string\>\>** containing all of the values in the given dictionary, sorted in ascending order of the sizes of their first elements. You can use a **foreach** loop to iterate through either the key-value pairs in the dictionary or through the **List\<string\>**s in the dictionary's [**Values**](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.values?view=net-6.0#system-collections-generic-dictionary-2-values) property. After copying all of the values in the dictionary to a list, sort the list using its [**Sort**](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.sort?view=net-6.0#system-collections-generic-list-1-sort(system-comparison((-0)) method. This method takes as its parameter a [**Comparison\<List\<string\>\>**](https://learn.microsoft.com/en-us/dotnet/api/system.comparison-1?view=net-6.0), which is a *delegate* type - a reference to a method. Here you can simply provide there name of the above method that compares **List\<string\>**s.
+This method should take as its only parameter a **Dictionary\<(int, int), List\<string\>\>** as returned by the above method. It should return a **List\<List\<string\>\>** containing all of the values in the given dictionary, sorted in ascending order of the sizes of their first elements. You can use a **foreach** loop to iterate through either the key-value pairs in the dictionary or through the **List\<string\>**s in the dictionary's [**Values**](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.dictionary-2.values?view=net-6.0#system-collections-generic-dictionary-2-values) property. After copying all of the values in the dictionary to a list, sort the list using its [**Sort**](https://learn.microsoft.com/en-us/dotnet/api/system.collections.generic.list-1.sort?view=net-6.0#system-collections-generic-list-1-sort(system-comparison((-0)) method. This method takes as its parameter a [**Comparison\<List\<string\>\>**](https://learn.microsoft.com/en-us/dotnet/api/system.comparison-1?view=net-6.0), which is a *delegate* type - a reference to a method. Here you can simply provide the name of the above method that compares **List\<string\>**s.
 
 #### 6.1.9. A private static method to get all the ways of partitioning a given goal set
 
-This method should take as its only parameter a **List\<string\>** giving a goal set. It should return a **List\<KeyValuePair\<string, List\<List\<string\>\>\>\>** giving the collection of key-value pairs to be used in Step 3 of the minimization algorithm (see [Section 4.4. Improved Lower Bounds](#4.4. Improved Lower Bounds) and [Section 4.5. Data Structures](#4.5. Data Structures)). After constructing a new **List\<KeyValuePair\<string, List\<List\<string\>\>\>\>**, iterate through all of the possible guesses. On each iteration:
+This method should take as its only parameter a **List\<string\>** giving a nonempty goal set. It should return a **List\<KeyValuePair\<string, List\<List\<string\>\>\>\>** giving the collection of key-value pairs to be used in Step 3 of the minimization algorithm (see [Section 4.4. Improved Lower Bounds](#4.4. Improved Lower Bounds) and [Section 4.5. Data Structures](#4.5. Data Structures)). After constructing a new **List\<KeyValuePair\<string, List\<List\<string\>\>\>\>**, iterate through all of the possible guesses. On each iteration:
 
 - Using the appropriate methods above, obtain the partition that results from applying the current guess to the given goal set. The partition should be in the form of a **List\<List\<string\>\>**.
 - If the first **List\<string\>** has fewer elements than the given goal set, add to the **List\<KeyValuePair\<string, List\<List\<string\>\>\>\>** a key-value pair containing the current guess as the key and the partition obtained above as the value.
@@ -332,7 +334,7 @@ For this class, you will need seven **private** fields, three event handlers, an
 
 You will need the following **private** fields:
 
-- A **readonly NumericUpDown[&nbsp;]** that will contain the four **NumericUpDown**s on the control. Initialize it to a new array, using the appropriate constant from the **Strategy** class for its size.
+- A **readonly NumericUpDown[&nbsp;]** that will contain the four **NumericUpDown**s in the GUI. Initialize it to a new array, using the appropriate constant from the **Strategy** class for its size.
 - A **readonly** [**Random**](https://learn.microsoft.com/en-us/dotnet/api/system.random?view=net-6.0) giving a random number generator. Initialize it to a new instance using no parameters.
 - A **string** giving the code chosen by the codemaker. To avoid the need to make this field nullable, initialize it to an empty string.
 - An **int** giving the number of guesses made so far in the current game.
@@ -362,7 +364,44 @@ First, increment the number of guesses made and obtain the score of the optimal 
 
 #### 6.2.5. An event handler for the "Guess:" button
 
-Using a **StringBuilder** build a **string** containing the contents of each of the **NumericUpDown**s. If any of the following conditions hold, update the fields and GUI as is done in the above event handler, but using the this **string** as the guess instead of the optimal guess:
+Using a **StringBuilder** build a **string** containing the contents of each of the **NumericUpDown**s. Update the fields and GUI as is done in the above event handler, but using this **string** as the guess instead of the optimal guess, if any of the following conditions hold:
 
 - The current goal set has only one element, and the guess is this element. 
+
 - The optimal score of this guess is less the optimal score of the current optimal guess. To determine the optimal score of the chosen guess, use the chosen guess to partition the goal set, and convert it to a list. Then using the appropriate method from the **Strategy** class, determine the optimal score of this partition. When calling this method, use 0 as the lower-bound and the current optimal score as the upper-bound.
+
+- The user clicks "Yes" in the **MessageBox** indicating that the guess isn't optimal. The **MessageBox**'s [**Show**](https://learn.microsoft.com/en-us/dotnet/api/system.windows.messagebox.show?view=windowsdesktop-6.0#system-windows-messagebox-show(system-string-system-string-system-windows-messageboxbutton)) method needs the following parameters:
+
+  - A **string** giving the message to display (see [Section 3.2. Behavior of the GUI](#3.2. Behavior of the GUI)).
+  - A **string** giving the title.
+  - **MessageBoxButtons.YesNo**.
+
+  It will return **DialogResult.Yes** if the user clicks the "Yes" button.
+
+## 7. Testing and Performance
+
+Unit tests have been provided to test your **Strategy** class. You should make sure these pass before testing the GUI. Make sure your Test Explorer is set up to group first by class, then by traits, and to display in increasing order. This will order the tests appropriately so that you can work through them from top to bottom. You might want to run the tests one trait at a time, as the tests in the last two traits have large timeout values. However, once you've tested all the traits, you should make sure all of the tests pass.
+
+Most of the optimizations discussed in [Section 4.3. Alpha-Beta Pruning](#4.3. Alpha-Beta Pruning) and [Section 4.4. Improved Lower Bounds](#4.4. Improved Lower Bounds) can't be tested directly because they only affect performance. The one exception is that the tests in trait "E: ToList" test that the **ToList** method correctly sorts the goal sets in the returned partition. The remaining optimizations, including the sorting of the partitions within the list of key-value pairs in the **OptimalGuess** method, are tested indirectly by checking the running times of the tests in traits "K: Pruning" and "L: Performance". If any of these tests time out, you should first focus on the optimizations  before looking for other coding inefficiencies. The tests in trait "L: Performance" also serve as the main performance test. Each of these tests should take at most a few seconds. 
+
+You will also need to test the GUI interactively. If the unit tests all pass, you can focus mostly on the basic operation of the GUI. However, you should also make sure that initial guesses with at least two different colors are accepted as optimal and that repeated guesses are not. Also, make sure that when guesses are all made using the "Make Optimal Guess" button, the puzzle is solved in at most 5 guesses. Finally, make sure that the hidden codes appear to be selected randomly.
+
+## 8. Submitting Your Assignment
+
+Be sure to **commit** all your changes, then **push** your commits to your GitHub repository. Make sure the **Ksu.Cis300.MastermindTeacher** folder in your repository contains all four .cs files, as we can only grade what is present in the repository. Then submit the _entire URL_ of the commit that you want graded. 
+
+**Note:** The repositories for the homework assignments for this class are set up to use GithHub's autograding feature to track push times. No actual testing/grading is done, but after each push, the GitHub page for the repository will show a green check mark on the line indicating the latest commit. Clicking that check mark will display a popup indicating that all checks have passed, regardless of whether your program works. You may also get an email indicating that all checks have passed. The only purpose for using the autograding feature in this way is to give us a backup indication of your push times in case you submitted your assignment incorrectly.
+
+## 9. Optimality of Initial Guesses
+
+For those interested, in this section, we will argue that the initial goal set has an optimal score of 5, and that any initial guess with at least two different colors is optimal.
+
+First, let's consider which guesses are optimal for the initial goal set. We don't need to consider each of the 1296 guesses separately because we can take advantage of symmetry. For example, if `0001` is optimal, then so are `0002`, `1113`, `4544`, or any other initial guess with 1 of one color and 3 of the other. Using symmetry, we can focus on the following initial guesses:
+
+- `0000`: All the same color.
+- `0001`: 3 of one color and 1 of the other.
+- `0011`: 2 each of two colors.
+- `0012`: Three colors.
+- `0123`: Four colors.
+
+The unit tests in trait "L: Performance" demonstrate that the worst-case number of guesses for the partitions that result from each of the last four of the above guesses is 4. A similar unit test can be used to show that the worst-case number of guesses for the partition that results from a guess of `0000` is 5; however, this test was removed from the final version of the provided unit tests because it takes too long to execute. (If you want to wait for it, you can make an initial guess of `0000` from the GUI to see that it is suboptimal.) This tells us that any initial guess containing at least two colors is optimal, and that the optimal score of the initial goal set is 5.
